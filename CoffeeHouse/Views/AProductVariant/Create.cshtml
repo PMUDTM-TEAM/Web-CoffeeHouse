@@ -1,0 +1,82 @@
+﻿@model CoffeeHouse.Models.VM.VariantCreateVM
+
+@{
+	Layout = "_AdminLayout";
+}
+<section class="section">
+	<div class="section-header">
+		<h1>Products</h1>
+	</div>
+	<div class="section-body">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h4>Create Product Variants</h4>
+					</div>
+					<div class="card-body">
+						<form id="variantForm" class="form" enctype="multipart/form-data">
+
+							<input type="hidden" name="Pro_Id" value="@Model.products.Id" />
+
+							<div class="form-group">
+								<label>Quantity</label>
+								<input type="text" class="form-control" name="Quantity">
+							</div>
+							<div class="form-group">
+								<label>Price</label>
+								<input type="number" class="form-control" name="Price">
+							</div>
+							<div class="form-group">
+								<label>Size</label>
+								<select class="form-control main-category" name="Size_Id">
+									<option disabled selected>--Select Size--</option>
+									@foreach (var size in Model.sizes)
+									{
+										<option value="@size.Value">@size.Text</option>
+									}
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary">Create</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('#variantForm').on('submit', function (e) {
+				e.preventDefault();
+				var formData = new FormData(this);
+				console.log(formData);
+				$.ajax({
+					url: '@Url.Action("Create", "AProductVariant")',
+					type: 'POST',
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (response) {
+						Swal.fire(
+							'Success!',
+							'Variant created successfully!',
+							'success'
+						).then(function () {
+							window.location.href = '@Url.Action("Index", "AProductVariant", new { proID = Model.products.Id })';
+						});
+					},
+					error: function (xhr, status, error) {
+						Swal.fire(
+							'Error!',
+							'There was an error creating the variant.',
+							'error'
+						);
+					}
+				});
+			});
+		});
+	</script>
+}

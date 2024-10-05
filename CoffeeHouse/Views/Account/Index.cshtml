@@ -1,0 +1,109 @@
+﻿@{
+    @model CoffeeHouse.Models.Register
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+
+}
+ <div class="login-register-area section-space-y-axis-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <form asp-action="Login" method="post">
+                    <div class="login-form">
+                        <h4 class="login-title">Login</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label>Email Address*</label>
+                                <input type="email" name="Email" placeholder="Email Address" required>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-12">
+                                <label>Password</label>
+                                <input type="password" name="Password" placeholder="Password" required>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="text-danger">@TempData["ErrorMessage"]</div>
+                            }
+
+
+                            <div class="col-lg-12 pt-5">
+                                <button type="submit" class="btn btn-custom-size lg-size btn-primary">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+
+            @* Register *
+            <div class="col-lg-6 pt-10 pt-lg-0">
+                <form asp-action="Register" method="post">
+                    <div class="login-form">
+                        <h4 class="login-title">Register</h4>
+
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <label asp-for="FirstName">First Name</label>
+                                <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name" required />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label asp-for="LastName">Last Name</label>
+                                <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name" required />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label asp-for="Email">Email Address*</label>
+                                <input type="email" class="form-control" asp-for="Email" placeholder="Email Address" required />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Password">Password</label>
+                                <input type="password" class="form-control" asp-for="Password" placeholder="Password" required />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="ConfirmPassword">Confirm Password</label>
+                                <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-custom-size lg-size btn-primary">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                  
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> *@
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: 'Thành công!',
+                text: '@Html.Raw(TempData["SuccessMessage"])',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+}
+
+
