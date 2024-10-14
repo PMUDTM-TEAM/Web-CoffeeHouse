@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CoffeeHouse.Models
+namespace OrderHighLand.Models
 {
     public class Register
     {

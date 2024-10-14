@@ -7,5 +7,6 @@
 		public int Quantity { get; set; }
 		public int Provar_Id { get; set; }
 		public float TotalPrice { get; set; }
+		public List<int> Topping_Id { get; set; }
 	}
 }
