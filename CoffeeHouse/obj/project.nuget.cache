@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "3nCSqzh8JK2CjQP/VtfE67phPsjJB3B03Ub8UNZYQvSMmYeDEoEEq6LEnfADDUEXsYYmP521+b63/x6YEs2G6A==",
+  "dgSpecHash": "p5a5U87BPOe7xCYr4Cs9NQgAZ/6pz73ddRZlZ+1RQzvFfkF1hBEBC32opaopnJzBzIbAJnauMNyMWAjpgzgkXg==",
   "success": true,
-  "projectFilePath": "D:\\Các Môn HK7\\PT_PMUDTM\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\HK7\\Ứng dụng thông minh\\Đồ án\\Web\\Web-CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.data.sqlclient\\4.8.6\\system.data.sqlclient.4.8.6.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -132,7 +132,32 @@
                         </div>
                     } *@
 
-
+                    @if (ViewBag.Toppings != null && ViewBag.Toppings.Count > 0)
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên Topping</th>
+                                    <th>Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var topping in ViewBag.Toppings)
+                                {
+                                    <tr>
+                                        <td>@topping.Id</td>
+                                        <td>@topping.Name</td>
+                                        <td>@topping.Price</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Không có topping nào để hiển thị.</p>
+                    }
                     
                    
                 </div>
