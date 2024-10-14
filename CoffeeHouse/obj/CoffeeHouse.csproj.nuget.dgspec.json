@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Các Môn HK7\\PT_PMUDTM\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj": {}
+    "D:\\HK7\\Ứng dụng thông minh\\Đồ án\\Web\\Web-CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj": {}
   },
   "projects": {
-    "D:\\Các Môn HK7\\PT_PMUDTM\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj": {
+    "D:\\HK7\\Ứng dụng thông minh\\Đồ án\\Web\\Web-CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Các Môn HK7\\PT_PMUDTM\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
+        "projectUniqueName": "D:\\HK7\\Ứng dụng thông minh\\Đồ án\\Web\\Web-CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
         "projectName": "CoffeeHouse",
-        "projectPath": "D:\\Các Môn HK7\\PT_PMUDTM\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\Các Môn HK7\\PT_PMUDTM\\CoffeeHouse\\CoffeeHouse\\CoffeeHouse\\obj\\",
+        "projectPath": "D:\\HK7\\Ứng dụng thông minh\\Đồ án\\Web\\Web-CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\HK7\\Ứng dụng thông minh\\Đồ án\\Web\\Web-CoffeeHouse\\CoffeeHouse\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -9,117 +9,117 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CoffeeHouse
 build_property.RootNamespace = CoffeeHouse
-build_property.ProjectDir = D:\Các Môn HK7\PT_PMUDTM\CoffeeHouse\CoffeeHouse\CoffeeHouse\
+build_property.ProjectDir = D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Các Môn HK7\PT_PMUDTM\CoffeeHouse\CoffeeHouse\CoffeeHouse
+build_property.MSBuildProjectDirectory = D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Account/Detail.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Account/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Account/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Account/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/AdminDashboard/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/AdminDashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXNoYm9hcmRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/AProductVariant/Create.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/AProductVariant/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVByb2R1Y3RWYXJpYW50XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/AProductVariant/Edit.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/AProductVariant/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVByb2R1Y3RWYXJpYW50XEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/AProductVariant/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/AProductVariant/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVByb2R1Y3RWYXJpYW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/AProduct/Create.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/AProduct/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVByb2R1Y3RcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/AProduct/Edit.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/AProduct/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVByb2R1Y3RcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/AProduct/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/AProduct/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVByb2R1Y3RcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/ASize/Create.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/ASize/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVNpemVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/ASize/Edit.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/ASize/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVNpemVcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/ASize/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/ASize/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVNpemVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Cart/Checkout.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Cart/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxDaGVja291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Cart/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Category/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Home/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Home/Privacy.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Product/Detail.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Product/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Product/Index.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Shared/Footer.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Shared/Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEZvb3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Shared/Navbar.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Shared/Navbar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmJhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Shared/SideBar.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Shared/SideBar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFNpZGVCYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Shared/_AdminLayout.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Shared/_AdminLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/_ViewImports.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/_ViewStart.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Các Môn HK7/PT_PMUDTM/CoffeeHouse/CoffeeHouse/CoffeeHouse/Views/Shared/_Layout.cshtml]
+[D:/HK7/Ứng dụng thông minh/Đồ án/Web/Web-CoffeeHouse/CoffeeHouse/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-38c4r93apt

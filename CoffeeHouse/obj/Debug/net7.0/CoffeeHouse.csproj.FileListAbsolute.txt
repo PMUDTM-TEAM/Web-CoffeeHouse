@@ -28,3 +28,41 @@ D:\Các Môn HK7\PT_PMUDTM\CoffeeHouse\CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\
 D:\Các Môn HK7\PT_PMUDTM\CoffeeHouse\CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.pdb
 D:\Các Môn HK7\PT_PMUDTM\CoffeeHouse\CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.genruntimeconfig.cache
 D:\Các Môn HK7\PT_PMUDTM\CoffeeHouse\CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\ref\CoffeeHouse.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\appsettings.Development.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\appsettings.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\CoffeeHouse.staticwebassets.runtime.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\CoffeeHouse.exe
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\CoffeeHouse.deps.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\CoffeeHouse.runtimeconfig.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\CoffeeHouse.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\CoffeeHouse.pdb
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.GeneratedMSBuildEditorConfig.editorconfig
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.AssemblyInfoInputs.cache
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.AssemblyInfo.cs
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.csproj.CoreCompileInputs.cache
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.MvcApplicationPartsAssemblyInfo.cache
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.RazorAssemblyInfo.cache
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.RazorAssemblyInfo.cs
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\staticwebassets\msbuild.CoffeeHouse.Microsoft.AspNetCore.StaticWebAssets.props
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\staticwebassets\msbuild.build.CoffeeHouse.props
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.CoffeeHouse.props
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.CoffeeHouse.props
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\staticwebassets.pack.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\staticwebassets.build.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\staticwebassets.development.json
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\scopedcss\bundle\CoffeeHouse.styles.css
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\scopedcss\projectbundle\CoffeeHouse.bundle.scp.css
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\refint\CoffeeHouse.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.pdb
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.genruntimeconfig.cache
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\ref\CoffeeHouse.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\System.Data.SqlClient.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\runtimes\win-arm64\native\sni.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\runtimes\win-x64\native\sni.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\runtimes\win-x86\native\sni.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\bin\Debug\net7.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.csproj.AssemblyReference.cache
+D:\HK7\Ứng dụng thông minh\Đồ án\Web\Web-CoffeeHouse\CoffeeHouse\obj\Debug\net7.0\CoffeeHouse.csproj.CopyComplete
