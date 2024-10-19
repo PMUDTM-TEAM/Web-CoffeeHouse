@@ -6,7 +6,7 @@ namespace CoffeeHouse.Service
 {
     public class ConnectDB
     {
-        private readonly string _connectionString = "Server=DESKTOP-741DDSM\\DIEN;Database=DB_CF;User Id=sa;Password=123;";
+        private readonly string _connectionString = "Server=LAPTOP-5KVBJE6O\\SQLEXPRESS;Database=DB_CF;User Id=sa;Password=123;";
 
         public string GetConnectionString()
         {

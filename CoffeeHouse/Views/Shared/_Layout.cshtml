@@ -145,12 +145,12 @@
                                                 <i class="pe-7s-user"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
-                                                <li><a class="dropdown-item" href="/Account/Detail">My account</a></li>
-                                               @*  @if (ViewContext.HttpContext.Session.GetString("UserName") != null)
-                                                {       
+                                                @if (ViewContext.HttpContext.Session.GetString("UserName") != null)
+                                                {
+                                                    <li><a class="dropdown-item" href="/Account/Detail">My account</a></li>
                                                     <li>
                                                         <span class="dropdown-item">
-                                                           Xin chào @ViewContext.HttpContext.Session.GetString("UserName")
+                                                            Xin chào @ViewContext.HttpContext.Session.GetString("UserName")
                                                         </span>
                                                     </li>
                                                     <li>
@@ -159,15 +159,14 @@
                                                 }
                                                 else
                                                 {
-                                                   
                                                     <li>
                                                         <a class="dropdown-item" href="/Account">
                                                             Login | Register
                                                         </a>
                                                     </li>
-                                                } *@
-
+                                                }
                                             </ul>
+
                                         </li>
                                         <li>
                                             <a href="#exampleModal" class="search-btn bt" data-bs-toggle="modal"

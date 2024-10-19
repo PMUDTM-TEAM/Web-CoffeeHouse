@@ -44,7 +44,7 @@
                             <h4 class="small-title">MY ORDERS</h4>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
-                                    <tbody>
+                                    <thead>
                                         <tr>
                                             <th>ORDER</th>
                                             <th>DATE</th>
@@ -52,29 +52,37 @@
                                             <th>TOTAL</th>
                                             <th></th>
                                         </tr>
-                                        <tr>
-                                            <td><a class="account-order-id" href="#">#5364</a></td>
-                                            <td>Mar 27, 2019</td>
-                                            <td>On Hold</td>
-                                            <td>$162.00 for 2 items</td>
-                                            <td>
-                                                <a href="#" class="btn btn-dark btn-primary-hover"><span>View</span></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a class="account-order-id" href="#">#5356</a></td>
-                                            <td>Mar 27, 2019</td>
-                                            <td>On Hold</td>
-                                            <td>$162.00 for 2 items</td>
-                                            <td>
-                                                <a href="#" class="btn btn-dark btn-primary-hover"><span>View</span></a>
-                                            </td>
-                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null && Model.Count > 0)
+                                        {
+                                            foreach (var order in Model)
+                                            {
+                                                <tr>
+                                                    <td><a class="account-order-id" href="#">#@order.Id</a></td>
+                                                    <td>@order.Date.ToString("dd/MM/yyyy")</td>
+                                                    <td>@order.Status</td>
+                                                    <td>@order.TotalPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+                                                    <td>
+                                                        <a href="@Url.Action("OrderDetails", "Order", new { orderId = order.Id })" class="btn btn-primary">View</a>
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="5" class="text-center">No orders found.</td>
+                                            </tr>
+                                        }
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
                         <div class="myaccount-address">
                             <p>The following addresses will be used on the checkout page by default.</p>
