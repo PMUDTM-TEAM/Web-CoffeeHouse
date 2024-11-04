@@ -77,8 +77,10 @@
                             </div>
                         </div>
                     </div>
-                 @*    @foreach (var product in ViewBag.NewProducts)
+                    @foreach (var item in ViewBag.NewProducts)
                     {
+                        var variant = item.Variant; // Lấy ProductVariant
+                        var product = item.Product;  // Lấy Product tương ứng
                         <div class="col-lg-3 col-md-6 ">
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
@@ -93,7 +95,10 @@
                                     <div class="price-box">
                                         <div class="price-box-holder">
                                             <span>Price:</span>
-                                            <span class="new-price text-primary">$130.00</span>
+                                            <span class="new-price text-primary">@String.Format("{0:N0}", variant.Price).Replace(",", ".") đ</span>
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +112,10 @@
 
                     }
                     
-                    @foreach(var product in ViewBag.HotProducts)
+                    @foreach(var item in ViewBag.HotProducts)
                     {
+                        var variant = item.Variant; // Lấy ProductVariant
+                        var product = item.Product;  // Lấy Product tương ứng
                         <div class="col-lg-3 col-md-6 pt-7">
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
@@ -123,41 +130,16 @@
                                     <div class="price-box">
                                         <div class="price-box-holder">
                                             <span>Price:</span>
-                                            <span class="new-price text-primary">$150.00</span>
+                                            <span class="new-price text-primary">@variant.Price</span>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-                    } *@
+                    }
 
-                    @if (ViewBag.Toppings != null && ViewBag.Toppings.Count > 0)
-                    {
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Tên Topping</th>
-                                    <th>Giá</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var topping in ViewBag.Toppings)
-                                {
-                                    <tr>
-                                        <td>@topping.Id</td>
-                                        <td>@topping.Name</td>
-                                        <td>@topping.Price</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <p>Không có topping nào để hiển thị.</p>
-                    }
+                  
                     
                    
                 </div>

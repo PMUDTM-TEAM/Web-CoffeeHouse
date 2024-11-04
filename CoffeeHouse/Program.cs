@@ -1,7 +1,12 @@
+using CoffeeHouse.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductVariantService>();
 
 var app = builder.Build();
 
