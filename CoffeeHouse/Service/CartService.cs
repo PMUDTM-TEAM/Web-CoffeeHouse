@@ -15,12 +15,90 @@ namespace CoffeeHouse.Service
             _connectDB = new ConnectDB();
         }
 
+        // Hàm xóa tất cả các Cart ra khỏi Cart bởi A_Id
+        public async Task DeleteCartsByAIdAsync(int A_Id)
+        {
+            var query = @"
+                        DELETE FROM Cart
+                        WHERE A_Id = @A_Id";  
+
+            var connectionString = _connectDB.GetConnectionString(); 
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();  
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                       
+                        command.Parameters.AddWithValue("@A_Id", A_Id);
+
+                        
+                        await command.ExecuteNonQueryAsync();  
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");  
+            }
+        }
+
+
+        // Hàm lấy tất cả các Cart dựa trên A_Id
+        public async Task<List<int>> getAllCartIdByAId(int A_Id)
+        {
+            var query = @"
+                        SELECT Id
+                        FROM Cart
+                        WHERE A_Id = @A_Id";  
+
+            var connectionString = _connectDB.GetConnectionString();  
+
+            try
+            {
+                var cartIds = new List<int>(); 
+
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();  
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        
+                        command.Parameters.AddWithValue("@A_Id", A_Id);
+
+                       
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())  
+                            {
+                               
+                                var cartId = reader.GetInt32(0);  
+                                cartIds.Add(cartId);
+                            }
+                        }
+                    }
+                }
+
+                return cartIds;  
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}"); 
+                return new List<int>();  
+            }
+        }
+
+
         // Hàm xóa các liên kết topping của cart vs topping dựa vào cart Id
         public async Task<int> RemoveCartToppingByCartIdAsync(int cartId)
         {
             string query = @"
-            DELETE FROM CartTopping
-            WHERE Cart_Id = @Cart_Id";
+                            DELETE FROM CartTopping
+                            WHERE Cart_Id = @Cart_Id";
 
             // Lấy chuỗi kết nối từ _connectDB
             var connectionString = _connectDB.GetConnectionString();
@@ -259,15 +337,15 @@ namespace CoffeeHouse.Service
             var query = @"
                 SELECT COALESCE(MAX(Id), 0) AS MaxId
                 FROM Cart
-                WHERE A_Id = @A_Id";  // Truy vấn SQL để lấy CartId lớn nhất theo A_Id
+                WHERE A_Id = @A_Id";  
 
-            var connectionString = _connectDB.GetConnectionString();  // Lấy chuỗi kết nối
+            var connectionString = _connectDB.GetConnectionString();  
 
             try
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    await connection.OpenAsync();  // Mở kết nối
+                    await connection.OpenAsync();
 
                     using (var command = new SqlCommand(query, connection))
                     {
@@ -276,14 +354,14 @@ namespace CoffeeHouse.Service
 
                         // Thực thi câu lệnh và lấy kết quả
                         var result = await command.ExecuteScalarAsync();
-                        return (result != DBNull.Value) ? Convert.ToInt32(result) : 0;  // Trả về giá trị hoặc 0 nếu không có
+                        return (result != DBNull.Value) ? Convert.ToInt32(result) : 0; 
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi: {ex.Message}");  // Xử lý lỗi
-                return 0;  // Trả về 0 nếu có lỗi
+                Console.WriteLine($"Lỗi: {ex.Message}");  
+                return 0;  
             }
         }
 
@@ -292,32 +370,32 @@ namespace CoffeeHouse.Service
         {
             var query = @"
                 INSERT INTO Cart (A_Id, Quantity, Provar_Id, TotalPrice) 
-                VALUES (@A_Id, @Quantity, @Provar_Id, @TotalPrice)";  // Câu truy vấn SQL
+                VALUES (@A_Id, @Quantity, @Provar_Id, @TotalPrice)"; 
 
-            var connectionString = _connectDB.GetConnectionString();  // Lấy chuỗi kết nối
+            var connectionString = _connectDB.GetConnectionString();  
 
             try
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    await connection.OpenAsync();  // Mở kết nối
+                    await connection.OpenAsync();  
 
                     using (var command = new SqlCommand(query, connection))
                     {
-                        // Thêm các tham số
+                       
                         command.Parameters.AddWithValue("@A_Id", cart.A_Id);
                         command.Parameters.AddWithValue("@Quantity", cart.Quantity);
                         command.Parameters.AddWithValue("@Provar_Id", cart.Provar_Id);
                         command.Parameters.AddWithValue("@TotalPrice", cart.TotalPrice);
 
-                        // Thực thi câu truy vấn
+                       
                         await command.ExecuteNonQueryAsync();
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi: {ex.Message}");  // Xử lý lỗi
+                Console.WriteLine($"Lỗi: {ex.Message}");  
             }
         }
 

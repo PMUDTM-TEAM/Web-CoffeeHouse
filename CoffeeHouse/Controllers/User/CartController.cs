@@ -143,5 +143,68 @@ namespace CoffeeHouse.Controllers.User
             return Json(new { success = true, message = "Sản phẩm đã được thêm vào giỏ hàng." });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> placeOrder(string address, string district, string ward, string phone, decimal cartPrice, List<ProductOrder> products)
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            int A_Id = int.Parse(userId);
+            //int Address_Id = await addressService.getAddressIdMax() + 1;
+            var addresses = new Addresses
+            { 
+                Address = address,
+                A_ID = int.Parse(userId),
+                District = district,
+                Ward = ward,
+                Phone = phone
+            };
+            await addressService.AddToAddressAsync(addresses);
+            //int Order_Id = await orderService.getMaxIdOrder() + 1;
+            int Address_Id = await addressService.GetAddressIdMaxByAIdAsync(A_Id);
+            var order = new Orders
+            {
+              
+                Date = DateTime.Now,
+                Status = "Pending",
+                A_Id = A_Id,
+                TotalPrice = cartPrice,
+                Address_Id = Address_Id,
+            };
+            await orderService.AddToOrderAsync(order);
+            int Order_Id = await orderService.GetOrderIdMaxByAIdAsync(A_Id);
+            foreach (var product in products)
+            {
+                // Truy cập thông tin từng sản phẩm
+                int provarId = product.Provar_Id;
+                List<int> toppingIds = product.Topping_Ids;
+                  
+                int quantity = product.Quantity;
+                decimal totalPrice = product.TotalPrice;
+
+                //int orderDetail_Id = await orderService.getMaxIdOrderDetail() + 1;
+                var orderDetail = new OrderDetails
+                {
+
+                    Price = totalPrice,
+                    Quantity = quantity,
+                    Provar_Id = provarId,
+                    Order_Id = Order_Id
+                };
+                await orderService.addToOrderDetail(orderDetail);
+                int orderDetail_Id = await orderService.GetOrderDetailIdMaxByOrderIdAsync(Order_Id);
+                foreach (var toppingId in toppingIds)
+                {
+                    await orderService.AddToOrderToppingAsync(orderDetail_Id, toppingId);
+                }
+            }
+
+            List<int> cart_Ids = await cartService.getAllCartIdByAId(A_Id);
+            foreach(var cartId in cart_Ids)
+            {
+                int checkRemove=await cartService.RemoveCartToppingByCartIdAsync(cartId);
+            }
+            await cartService.DeleteCartsByAIdAsync(A_Id);
+            return Json(new { success = true, message = "Đặt đơn hàng thành công" });
+
+        }
     }
 }

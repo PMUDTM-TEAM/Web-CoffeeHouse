@@ -15,6 +15,182 @@ namespace CoffeeHouse.Service
             _connectDB = new ConnectDB();
         }
 
+        public async Task<int> GetOrderDetailIdMaxByOrderIdAsync(int Order_Id)
+        {
+            var query = @"
+                SELECT COALESCE(MAX(Id), 0) AS MaxId
+                FROM OrderDetail
+                WHERE Order_Id = @Order_Id"; 
+
+            var connectionString = _connectDB.GetConnectionString(); 
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();  
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        
+                        command.Parameters.AddWithValue("@Order_Id", Order_Id);
+
+                       
+                        var result = await command.ExecuteScalarAsync();
+                        return (result != DBNull.Value) ? Convert.ToInt32(result) : 0; 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");  
+                return 0; 
+            }
+        }
+
+
+        // Hàm thêm vào orderDetail
+        public async Task<int> addToOrderDetail(OrderDetails orderDetail)
+        {
+            
+            string query = @"
+                    INSERT INTO OrderDetail (ProVar_Id, Quantity, TotalPrice, Order_Id)
+                    VALUES (@ProVar_Id, @Quantity, @TotalPrice, @Order_Id);
+                    SELECT SCOPE_IDENTITY();"; 
+
+            var connectionString = _connectDB.GetConnectionString(); 
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync(); 
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        
+                        command.Parameters.AddWithValue("@ProVar_Id", orderDetail.Provar_Id);
+                        command.Parameters.AddWithValue("@Quantity", orderDetail.Quantity);
+                        command.Parameters.AddWithValue("@TotalPrice", orderDetail.Price);
+                        command.Parameters.AddWithValue("@Order_Id", orderDetail.Order_Id);
+
+                       
+                        var result = await command.ExecuteScalarAsync();
+
+                        return result != DBNull.Value ? Convert.ToInt32(result) : 0; 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding to OrderDetail: {ex.Message}");
+                return 0; // Trả về 0 nếu có lỗi
+            }
+        }
+
+
+
+        // Hàm lấy order id lớn nhất dựa vào account truyền vào
+        public async Task<int> GetOrderIdMaxByAIdAsync(int A_Id)
+        {
+            var query = @"
+                    SELECT COALESCE(MAX(Id), 0) AS MaxId
+                    FROM [Order]
+                    WHERE A_Id = @A_Id";  // Truy vấn SQL để lấy OrderId lớn nhất theo A_Id
+
+            var connectionString = _connectDB.GetConnectionString();  // Lấy chuỗi kết nối
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();  // Mở kết nối
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // Thêm tham số A_Id
+                        command.Parameters.AddWithValue("@A_Id", A_Id);
+
+                        // Thực thi câu lệnh và lấy kết quả
+                        var result = await command.ExecuteScalarAsync();
+                        return (result != DBNull.Value) ? Convert.ToInt32(result) : 0;  // Trả về giá trị hoặc 0 nếu không có
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");  // Xử lý lỗi
+                return 0;  // Trả về 0 nếu có lỗi
+            }
+        }
+
+
+        // Hàm thêm vào OrderTopping
+        public async Task AddToOrderToppingAsync(int orderDetailId, int toppingId)
+        {
+            string query = @"
+                    INSERT INTO OrderTopping (OrderDetail_Id, Topping_Id)
+                    VALUES (@OrderDetail_Id, @Topping_Id)";
+
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@OrderDetail_Id", orderDetailId);
+                        command.Parameters.AddWithValue("@Topping_Id", toppingId);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding to OrderTopping: {ex.Message}");
+            }
+        }
+
+        // Hàm thêm mới vào order
+        public async Task AddToOrderAsync(Orders order)
+        {
+            string query = @"
+                    INSERT INTO [Order] (Date, Status, TotalPrice, Address_Id, A_Id)
+                    VALUES (@Date, @Status, @TotalPrice, @Address_Id, @A_Id)";
+
+            var connectionString = _connectDB.GetConnectionString();  // Lấy chuỗi kết nối từ _connectDB
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // Thêm các tham số vào câu lệnh SQL
+                        command.Parameters.AddWithValue("@Date", order.Date);
+                        command.Parameters.AddWithValue("@Status", order.Status);
+                        command.Parameters.AddWithValue("@TotalPrice", order.TotalPrice);
+                        command.Parameters.AddWithValue("@Address_Id", order.Address_Id);
+                        command.Parameters.AddWithValue("@A_Id", order.A_Id);
+
+                        // Thực thi câu lệnh SQL
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+
         // Method to get the maximum Order ID from SQL Server
         public async Task<int> GetMaxIdOrder()
         {
