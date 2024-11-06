@@ -21,13 +21,13 @@
                         {
                             <tr>
                               @*   <td class="align-middle">@detail.Id</td> *@
-                                <td class="align-middle">
+                               @*  <td class="align-middle">
                                     <img src="~/imgs/@detail.ProductImage" alt="@detail.ProductName" style="max-width: 80px; height: auto; border-radius: 8px; object-fit: cover;" />
                                 </td>
                                 <td class="align-middle">@detail.ProductName</td>
                                 <td class="align-middle">@detail.Quantity</td>         
                                 <td class="align-middle">@string.Join(", ", detail.Toppings)</td>
-                                <td class="align-middle">@detail.Price.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+                                <td class="align-middle">@detail.Price.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td> *@
                             </tr>
                         }
                     </tbody>

@@ -13,14 +13,14 @@ namespace CoffeeHouse.Controllers.User
         }
         public async Task<IActionResult> OrderDetails(int orderId)
         {
-            var orderDetails = await _orderService.GetOrderDetailsByOrderIdAsync(orderId);
+            //var orderDetails = await _orderService.GetOrderDetailsByOrderIdAsync(orderId);
 
-            if (orderDetails == null)
-            {
-                return RedirectToAction("Index", "Account");
-            }
+            //if (orderDetails == null)
+            //{
+            //    return RedirectToAction("Index", "Account");
+            //}
 
-            return View(orderDetails);
+            return View(/*orderDetails*/);
         }
     }
 }

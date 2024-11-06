@@ -15,7 +15,11 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<DashboardService>();
 builder.Services.AddScoped<AccountService>();
-
+builder.Services.AddScoped<AddressService>();
+builder.Services.AddScoped<CartService>();
+builder.Services.AddScoped<SizeService>();
+builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<ToppingService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductVariantService>();
 

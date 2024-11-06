@@ -202,56 +202,7 @@ namespace CoffeeHouse.Service
             }
         }
 
-        // Method to get order details by order ID
-        public async Task<List<OrderDetails>> GetOrderDetailsByOrderIdAsync(int orderId)
-        {
-            string query = @"
-        SELECT od.Id AS OrderDetailId, od.Quantity, od.TotalPrice AS Price, 
-               p.Name AS ProductName, p.Image AS ProductImage,
-               ISNULL((
-                   SELECT STRING_AGG(t.Name, ',') 
-                   FROM Topping t
-                   INNER JOIN OrderTopping ot ON t.Id = ot.Topping_Id
-                   WHERE ot.OrderDetail_Id = od.Id
-               ), '') AS Toppings
-        FROM OrderDetail od
-        INNER JOIN ProductVariant pv ON od.ProVar_Id = pv.Id
-        INNER JOIN Product p ON pv.Pro_Id = p.Id
-        WHERE od.Order_Id = @Order_Id";
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(_connectDB.GetConnectionString()))
-                {
-                    await conn.OpenAsync();
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Order_Id", orderId);
-
-                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    var orderDetailsList = new List<OrderDetails>();
-
-                    while (await reader.ReadAsync())
-                    {
-                        orderDetailsList.Add(new OrderDetails
-                        {
-                            Id = reader.GetInt32(0),
-                            Quantity = reader.GetInt32(1),
-                            Price = reader.GetDecimal(2),
-                            ProductName = reader.GetString(3),
-                            ProductImage = reader.GetString(4),
-                            Toppings = reader.IsDBNull(5) ? new List<string>() : reader.GetString(5)?.Split(',').ToList()
-                        });
-                    }
-
-                    return orderDetailsList;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                return new List<OrderDetails>();
-            }
-        }
+        
 
     }
 }
