@@ -74,6 +74,35 @@ namespace CoffeeHouse.Controllers.User
            
         }
 
+        public async Task<IActionResult> removeCart(int Cart_Id)
+        {
+            int checkRemoveTopping = await cartService.RemoveCartToppingByCartIdAsync(Cart_Id);
+            int checkRemove = await cartService.RemoveFromCartByIdAsync(Cart_Id);
+
+            if (checkRemove == 1)
+            {
+                return Json(new { success = true, message = "Xóa thành công sản phẩm khỏi giỏ hàng." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Xóa sản phẩm không thành công." });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCartCount()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            int noLoginCount = 0;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Json(new { success = true, noLoginCount });
+            }
+            int count = await cartService.countCartByAId(int.Parse(userId));
+
+            return Json(new { success = true, count });
+        }
+
         [HttpPost]
         public async Task<IActionResult> addItemToCart(int productId, decimal price, int sizeId, List<int> toppings, int quantity)
         {

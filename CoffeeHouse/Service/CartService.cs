@@ -15,6 +15,109 @@ namespace CoffeeHouse.Service
             _connectDB = new ConnectDB();
         }
 
+        // Hàm xóa các liên kết topping của cart vs topping dựa vào cart Id
+        public async Task<int> RemoveCartToppingByCartIdAsync(int cartId)
+        {
+            string query = @"
+            DELETE FROM CartTopping
+            WHERE Cart_Id = @Cart_Id";
+
+            // Lấy chuỗi kết nối từ _connectDB
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Cart_Id", cartId);
+
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0 ? 1 : 0; // Trả về 1 nếu xóa thành công, 0 nếu không
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return 0; // Trả về 0 nếu có lỗi xảy ra
+            }
+        }
+
+
+        // Hàm xóa CartId nhờ vào Id truyền vào 
+        public async Task<int> RemoveFromCartByIdAsync(int Id)
+        {
+            string query = @"
+            DELETE FROM Cart
+            WHERE Id = @Id";
+
+            // Lấy chuỗi kết nối từ _connectDB
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", Id);
+
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0 ? 1 : 0; // Trả về 1 nếu xóa thành công, 0 nếu không
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return 0; // Trả về 0 nếu có lỗi xảy ra
+            }
+        }
+
+
+        // Đếm các cart dựa vào A_Id
+        public async Task<int> CountCartByAIdAsync(int A_Id)
+        {
+            // Truy vấn SQL để đếm số lượng Cart theo A_Id
+            string query = @"
+                    SELECT COUNT(*) AS cartCount
+                    FROM Cart
+                    WHERE A_Id = @A_Id";
+
+            // Lấy chuỗi kết nối từ _connectDB
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // Thêm tham số @A_Id vào câu lệnh truy vấn
+                        command.Parameters.AddWithValue("@A_Id", A_Id);
+
+                        // Thực hiện truy vấn và lấy giá trị đếm
+                        var count = (int)await command.ExecuteScalarAsync();
+                        return count;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return 0; // Trả về 0 nếu có lỗi xảy ra
+            }
+        }
+
+
         // Hàm lấy tất cả các Cart dựa vào A_Id và các topping của cart đó
         public async Task<List<Cart>> GetAllCartByIdAsync(int A_Id)
         {
