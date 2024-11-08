@@ -13,17 +13,68 @@ namespace CoffeeHouse.Service
         {
             _connectDB = new ConnectDB(); 
         }
+        // Hàm lấy product bằng slug
+        public async Task<List<Products>> GetProductBySlugAsync(string slug)
+        {
+            var query = @"
+                        SELECT Id, Name, Image, Type, Cate_Id, Slug
+                        FROM Product
+                        WHERE Slug = @Slug";
+
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                var products = new List<Products>();
+
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync(); 
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        
+                        command.Parameters.AddWithValue("@Slug", slug);
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            
+                            while (await reader.ReadAsync())
+                            {
+                                var product = new Products
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                                    Image = reader.GetString(reader.GetOrdinal("Image")),
+                                    Type = reader.GetString(reader.GetOrdinal("Type")),
+                                    Cate_Id = reader.GetInt32(reader.GetOrdinal("Cate_Id")),
+                                    Slug = reader.GetString(reader.GetOrdinal("Slug"))
+                                };
+                                products.Add(product);
+                            }
+                        }
+                    }
+                }
+                return products;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");
+                return new List<Products>(); 
+            }
+        }
+
 
         // Lấy tất cả các sản phẩm
         public async Task<List<Products>> GetAllAsync()
         {
-            // Truy vấn SQL để lấy tất cả các sản phẩm
+           
             string query = @"
                         SELECT Id, Name, Slug, Image, Type, Cate_Id
                         FROM Product
                     ";
 
-            // Lấy chuỗi kết nối từ _connectDB
+           
             var connectionString = _connectDB.GetConnectionString();
             var products = new List<Products>();
 
