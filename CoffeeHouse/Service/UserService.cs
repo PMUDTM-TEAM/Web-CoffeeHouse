@@ -68,7 +68,7 @@ namespace CoffeeHouse.Service
                 var query = @"
             INSERT INTO Account (Name, Email, Password, Role_Id)
             VALUES (@Name, @Email, @Password, 2);
-            SELECT SCOPE_IDENTITY();";  // Lấy ID vừa tạo
+            SELECT SCOPE_IDENTITY();";
 
                 using (var command = new SqlCommand(query, connection))
                 {
@@ -84,7 +84,7 @@ namespace CoffeeHouse.Service
                         A_NAME = model.Name,
                         A_EMAIL = model.Email,
                         A_PASSWORD = hashedPassword,
-                        ROLE_ID = 2 // Role mặc định
+                        ROLE_ID = 2
                     };
                 }
             }
