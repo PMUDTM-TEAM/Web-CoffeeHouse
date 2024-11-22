@@ -73,15 +73,17 @@
                                             <div class="product-content">
                                                 <a class="product-name pb-1"
                                                    href="">@item.Product.Name</a>
+                                                <div class="custom-price-quickview">
+                                               
                                                 <div class="price-box">
                                                     <div class="price-box-holder">
                                                         <span>Giá:</span>
-                                                        <span data-price="@item.ProductVariant.Price" class="text-primary">@item.ProductVariant.Price đ</span>
+                                                            <span data-price="@item.ProductVariant.Price" class="text-primary">@String.Format("{0:N0}", @item.ProductVariant.Price).Replace(",", ".") đ</span>
                                                     </div>
                                                 </div>
                                                 <div class="product-add-action">
                                                     <ul>
-                                                        <li><a class="space_cate"></a></li>
+                                                        @* <li><a class="space_cate"></a></li>
                                                         <li>
                                                             <a href="cart.html" data-tippy="Add to cart"
                                                                data-tippy-inertia="true"
@@ -90,7 +92,7 @@
                                                                data-tippy-theme="sharpborder">
                                                                 <i class="pe-7s-cart"></i>
                                                             </a>
-                                                        </li>
+                                                        </li> *@
                                                         <li class="quuickview-btn" data-bs-toggle="modal"
                                                             data-bs-target="#quickModal_@item.Product.Id">
                                                             <a href="#" data-tippy="Quickview"
@@ -101,7 +103,7 @@
                                                                 <i class="pe-7s-look"></i>
                                                             </a>
                                                         </li>
-                                                        <li>
+                                                       @*  <li>
                                                             <a href="wishlist.html" data-tippy="Add to wishlist"
                                                                data-tippy-inertia="true"
                                                                data-tippy-animation="shift-away"
@@ -109,9 +111,10 @@
                                                                data-tippy-theme="sharpborder">
                                                                 <i class="pe-7s-like"></i>
                                                             </a>
-                                                        </li>
+                                                        </li> *@
 
                                                     </ul>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +172,7 @@
                                                                     {
                                                                         if (!firstPriceDisplayed) // Chỉ hiển thị giá đầu tiên
                                                                         {
-                                                                            <span data-size="@proSize.Size.Size" id="ProSize_@proSize.Size.Id" class="new-price text-danger">Giá: @proSize.ProductVariant.Price đ</span>
+                                                                            <span data-size="@proSize.Size.Size" id="ProSize_@proSize.Size.Id" class="new-price text-danger">Giá:  @proSize.ProductVariant.Price đ</span>
                                                                             firstPriceDisplayed = true; // Đánh dấu đã hiển thị giá đầu tiên
                                                                         }
                                                                         else
@@ -231,7 +234,7 @@
                                                                     <div class="item_topping">
                                                                         <input data-toppingid="@topping.Id" type="checkbox" id="topping_@(topping.Id)_@(item.Product.Id)" class="topping-checkbox" value="@topping.Price" data-product-id="@item.Product.Id">
                                                                         <label for="topping_@(topping.Id)_@(item.Product.Id)" class="topping-label">
-                                                                            @topping.Name + @topping.Price đ
+                                                                            @topping.Name +  @String.Format("{0:N0}",@topping.Price).Replace(",", ".") đ
                                                                         </label>
                                                                     </div>
                                                                 }
@@ -256,12 +259,12 @@
                                                                         cart
                                                                     </a>
                                                                 </li>
-                                                                <li class="wishlist-btn-wrap">
+                                                               @*  <li class="wishlist-btn-wrap">
                                                                     <a class="custom-circle-btn" href="wishlist.html">
                                                                         <i class="pe-7s-like"></i>
                                                                     </a>
                                                                 </li>
-
+ *@
                                                             </ul>
 
                                                         </div>

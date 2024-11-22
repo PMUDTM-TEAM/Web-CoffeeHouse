@@ -6,7 +6,7 @@
 
 <main class="main-content">
 
-    <div class="single-product-area section-space-top-100">
+    <div class="single-product-area custom-padding ">
         <div class="container">
             @foreach (var item in ViewBag.ProductVariantsWithProducts)
             {
@@ -99,7 +99,7 @@
                                     <div class="item_topping">
                                         <input data-toppingid="@topping.Id" type="checkbox" id="topping_@(topping.Id)_@(item.Product.Id)" class="topping-checkbox" value="@topping.Price" data-product-id="@item.Product.Id">
                                         <label for="topping_@(topping.Id)_@(item.Product.Id)" class="topping-label">
-                                            @topping.Name + @topping.Price đ
+                                            @topping.Name +  @String.Format("{0:N0}",@topping.Price).Replace(",", ".") đ
                                         </label>
                                     </div>
                                 }
@@ -116,11 +116,11 @@
                                         cart
                                     </a>
                                 </li>
-                                <li class="wishlist-btn-wrap">
+                                @* <li class="wishlist-btn-wrap">
                                     <a class="custom-circle-btn" href="wishlist.html">
                                         <i class="pe-7s-like"></i>
                                     </a>
-                                </li>
+                                </li> *@
 
                             </ul>
                         </div>
