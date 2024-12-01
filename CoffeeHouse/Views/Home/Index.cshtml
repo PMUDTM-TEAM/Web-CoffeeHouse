@@ -70,7 +70,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="product-item">
                             <div class="product-img img-zoom-effect">
-                                <a href="shop.html">
+                                <a href="#">
                                     <img class="img-full" src="assets/images/newsletter/banner_app.jpg"
                                          alt="Product Images">
                                 </a>
@@ -84,7 +84,7 @@
                         <div class="col-lg-3 col-md-6 ">
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
-                                    <a href="shop.html">
+                                    <a href="/Product/Detail/@product.Slug">
                                         <img class="img-full"
                                              src="~/imgs/@product.Image"
                                              alt="Product Images">
@@ -116,24 +116,26 @@
                     {
                         var variant = item.Variant; // Lấy ProductVariant
                         var product = item.Product;  // Lấy Product tương ứng
-                        <div class="col-lg-3 col-md-6 pt-7">
+                        <div class="col-lg-3 col-md-6 " style="margin-top:15px">
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
-                                    <a href="shop.html">
+                                    <a href="/Product/Detail/@product.Slug">
                                         <img class="img-full"
                                              src="~/imgs/@product.Image"
                                              alt="Product Images">
                                     </a>
                                 </div>
                                 <div class="product-content">
-                                    <a class="product-name pb-1" href="">@product.Name</a>
+                                    <a class="product-name pb-1" href="/Product/Detail/@product.Slug">@product.Name</a>
                                     <div class="price-box">
                                         <div class="price-box-holder">
                                             <span>Price:</span>
-                                            <span class="new-price text-primary">@variant.Price</span>
+                                            <span class="new-price text-primary">@String.Format("{0:N0}", variant.Price).Replace(",", ".") đ</span>
+
+
+
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

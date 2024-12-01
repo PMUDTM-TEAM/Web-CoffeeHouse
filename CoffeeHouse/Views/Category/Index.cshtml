@@ -64,7 +64,7 @@
                                     <div class="col-xl-4 col-sm-6 pt-6 oneProduct" data-index="@item.Product.Id">
                                         <div class="product-item">
                                             <div class="product-img img-zoom-effect">
-                                                <a href="single-product-variable.html">
+                                                <a href="/Product/Detail/@item.Product.Slug">
                                                     <img class=" img-full  category-img"
                                                          src="~/imgs/@item.Product.Image"
                                                          alt="Product Images">
@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="product-content">
                                                 <a class="product-name pb-1"
-                                                   href="">@item.Product.Name</a>
+                                                   href="/Product/Detail/@item.Product.Slug">@item.Product.Name</a>
                                                 <div class="custom-price-quickview">
                                                
                                                 <div class="price-box">
@@ -278,7 +278,7 @@
                         </div>
 
                     </div>
-                    <div class="pagination-area pt-10">
+                  @*   <div class="pagination-area pt-10">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item">
@@ -291,7 +291,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> *@
                 </div>
             </div>
         </div>
@@ -301,30 +301,33 @@
 
 <!-- JavaScript -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById('searchInput');
-        const productItems = document.querySelectorAll('.product-item');
+    
 
-        const normalizeText = (text) => {
-            return text.toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .replace(/\s/g, "");
-        };
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById('searchInput');
+            const productItems = document.querySelectorAll('.oneProduct'); // Đổi selector sang .oneProduct
 
-        searchInput.addEventListener('input', function () {
-            const searchText = normalizeText(searchInput.value);
+            const normalizeText = (text) => {
+                return text.toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/\s/g, "");
+            };
 
-            productItems.forEach(item => {
-                const productName = normalizeText(item.querySelector('.product-name').innerText);
-                if (productName.includes(searchText)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+            searchInput.addEventListener('input', function () {
+                const searchText = normalizeText(searchInput.value);
+
+                productItems.forEach(item => {
+                    const productName = normalizeText(item.querySelector('.product-name').innerText);
+                    if (productName.includes(searchText)) {
+                        item.style.display = 'block'; // Hiển thị
+                    } else {
+                        item.style.display = 'none'; // Ẩn toàn bộ .oneProduct
+                    }
+                });
             });
         });
-    });
+
 
 
 
