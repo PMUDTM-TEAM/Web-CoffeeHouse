@@ -1,5 +1,6 @@
 ﻿@{
-
+    @model List<Orders>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 }
 <div class="account-page-area section-space-y-axis-100">
     <div class="container">
@@ -60,12 +61,15 @@
                                             {
                                                 <tr>
                                                     <td><a class="account-order-id" href="#">#@order.Id</a></td>
-                                                    <td>@order.Date.ToString("dd/MM/yyyy")</td>
+                                                    <td>@order.CreatedAt.ToString("dd/MM/yyyy")</td>
                                                     <td>@order.Status</td>
                                                     <td>@order.TotalPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
                                                     <td>
-                                                        <a href="@Url.Action("OrderDetails", "Order", new { orderId = order.Id })" class="btn btn-primary">View</a>
-
+                                                        <a href="@Url.Action("OrderDetails", "Order", new { orderId = order.Id })" class="btn btn-success">View</a>
+                                                        @if (order.Status == "Pending")
+                                                        {
+                                                            <a href="@Url.Action("CancelOrder", "Account", new { orderId = order.Id })" class="btn btn-danger">Cancel</a>
+                                                        }
                                                     </td>
                                                 </tr>
                                             }
@@ -77,11 +81,11 @@
                                             </tr>
                                         }
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
                         <div class="myaccount-address">
@@ -150,3 +154,32 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: 'Error!',
+                text: '@Html.Raw(TempData["ErrorMessage"])',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: 'Success!',
+                text: '@Html.Raw(TempData["SuccessMessage"])',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+}
