@@ -191,10 +191,15 @@ namespace CoffeeHouse.Controllers.User
                 };
                 await orderService.addToOrderDetail(orderDetail);
                 int orderDetail_Id = await orderService.GetOrderDetailIdMaxByOrderIdAsync(Order_Id);
-                foreach (var toppingId in toppingIds)
+
+                if (toppingIds != null && toppingIds.Count > 0)
                 {
-                    await orderService.AddToOrderToppingAsync(orderDetail_Id, toppingId);
+                    foreach (var toppingId in toppingIds)
+                    {
+                        await orderService.AddToOrderToppingAsync(orderDetail_Id, toppingId);
+                    }
                 }
+
             }
 
             List<int> cart_Ids = await cartService.getAllCartIdByAId(A_Id);
