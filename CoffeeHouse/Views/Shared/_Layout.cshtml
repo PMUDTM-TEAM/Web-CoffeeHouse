@@ -26,13 +26,14 @@
     <link rel="stylesheet" href="/assets//css/plugins/nice-select.css">
     <link rel="stylesheet" href="/assets//css/plugins/magnific-popup.min.css" />
     <link rel="stylesheet" href="/assets//css/plugins/ion.rangeSlider.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- Minify Version -->
     <!-- <link rel="stylesheet" href="/assets//css/vendor/vendor.min.css"> -->
     <!-- <link rel="stylesheet" href="/assets//css/plugins/plugins.min.css"> -->
     <!-- Style CSS -->
     <link rel="stylesheet" href="/assets//css/style.css">
     <!-- <link rel="stylesheet" href="/assets//css/style.min.css"> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -50,7 +51,7 @@
 
         <!-- Begin Main Header Area -->
         <header class="main-header-area">
-         
+
             <div class="header-top border-bottom d-none d-lg-block">
                 <div class="container">
                     <div class="row align-items-center">
@@ -101,8 +102,9 @@
                         <div class="col-lg-12">
                             <div class="header-middle-wrap position-relative">
 
-                                <a href="index.html" class="header-logo">
-                                    <img src="/assets//images/logo/dark.png" alt="Header Logo">
+                                <a href="/" class="header-logo">
+                                    <img src="/assets//images/logo/logo-cf.jpg" alt="Header Logo">
+                                    
                                 </a>
 
                                 <div class="main-menu d-none d-lg-block">
@@ -111,28 +113,28 @@
                                             <li class="drop-holder">
                                                 <a href="@Url.Action("Index", "Category", new { type = "nuoc" })">
                                                     Nước
-                                              
+
                                                 </a>
                                             </li>
                                             <li class="drop-holder">
                                                 <a href="">
                                                     Trà
-                                                  
+
                                                 </a>
-                                               
+
                                             </li>
                                             <li class="megamenu-holder">
                                                 <a href="">
                                                     Khác
-                                                   
+
                                                 </a>
-                                              
+
                                             </li>
-                                          
+
                                             <li>
                                                 <a href="">Cửa hàng</a>
                                             </li>
-                                            
+
                                         </ul>
                                     </nav>
                                 </div>
@@ -146,11 +148,11 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
                                                 <li><a class="dropdown-item" href="/Account/Detail">My account</a></li>
-                                               @*  @if (ViewContext.HttpContext.Session.GetString("UserName") != null)
-                                                {       
+                                                @if (ViewContext.HttpContext.Session.GetString("UserName") != null)
+                                                {
                                                     <li>
                                                         <span class="dropdown-item">
-                                                           Xin chào @ViewContext.HttpContext.Session.GetString("UserName")
+                                                            Xin chào @ViewContext.HttpContext.Session.GetString("UserName")
                                                         </span>
                                                     </li>
                                                     <li>
@@ -159,13 +161,13 @@
                                                 }
                                                 else
                                                 {
-                                                   
+
                                                     <li>
                                                         <a class="dropdown-item" href="/Account">
                                                             Login | Register
                                                         </a>
                                                     </li>
-                                                } *@
+                                                }
 
                                             </ul>
                                         </li>
@@ -175,15 +177,15 @@
                                                 <i class="pe-7s-search"></i>
                                             </a>
                                         </li>
-                                        <li class="d-none d-lg-block">
+                                       @*  <li class="d-none d-lg-block">
                                             <a href="wishlist.html">
                                                 <i class="pe-7s-like"></i>
                                             </a>
-                                        </li>
+                                        </li> *@
                                         <li class="minicart-wrap me-3 me-lg-0">
-                                            <a href="#miniCart" class="minicart-btn toolbar-btn">
+                                            <a href="/Cart" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <span class="quantity">5</span>
+                                                <span class="quantity">0</span>
                                             </a>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
@@ -596,7 +598,7 @@
                         <span class="ammount">$240.00</span>
                     </div>
                     <div class="group-btn_wrap d-grid gap-2">
-                        <a href="/Cart" class="btn btn-dark btn-primary-hover">View Cart</a>
+                        <a href="#" class="btn btn-dark btn-primary-hover">View Cart</a>
                         <a href="/Cart/Checkout" class="btn btn-dark btn-primary-hover">Checkout</a>
                     </div>
                 </div>
@@ -607,7 +609,7 @@
         <!-- Begin Slider Area -->
         @RenderBody()
 
-      
+
 
         <!-- Product Area End Here -->
         <!-- Begin Footer Area -->
@@ -619,14 +621,11 @@
                         <div class="col-lg-3">
                             <div class="widget-item">
                                 <div class="footer-logo pb-4">
-                                    <a href="index.html">
-                                        <img src="/assets//images/logo/light.png" alt="Logo">
+                                    <a href="/">
+                                        <img src="/assets//images/logo/logo-cf.jpg" alt="Logo">
                                     </a>
                                 </div>
-                                <p class="short-desc mb-2">
-                                    Lorem ipsum dolor sit amet, consectet adipisicing elit, sed
-                                    do eiusmod tempor incidi ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-                                </p>
+                     
                                 <div class="social-link pt-2">
                                     <ul>
                                         <li>
@@ -1040,7 +1039,121 @@
         <a class="scroll-to-top" href="">
             <i class="fa fa-chevron-up"></i>
         </a>
+
+        <!-- Chatbot button -->
+        <button id="chatbot-button">Chat</button>
+
+        <!-- Chatbox -->
+        <div id="chatbox">
+            <div id="chatbox-header">Chat with us</div>
+            <div id="chatbox-messages"></div>
+            <div id="chatbox-input">
+                <input type="text" id="user-input" placeholder="Type a message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+        <script>
+            const chatbotButton = document.getElementById('chatbot-button');
+            const chatbox = document.getElementById('chatbox');
+            const sendButton = document.getElementById('send-button');
+            const userInput = document.getElementById('user-input');
+            const chatboxMessages = document.getElementById('chatbox-messages');
+
+            // Toggle chatbox visibility
+            chatbotButton.addEventListener('click', () => {
+                chatbox.style.display = chatbox.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Send message to bot and display in chatbox
+            sendButton.addEventListener('click', () => {
+                const message = userInput.value;
+                if (message.trim()) {
+                    // Add user message to the chat
+                    addMessage('User', message);
+
+                    // Clear input field
+                    userInput.value = '';
+
+                    // Send message to bot server
+                    sendMessageToBot(message);
+                }
+            });
+
+            // Function to add message to chatbox
+            function addMessage(sender, message) {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = `${sender}: ${message}`;
+                chatboxMessages.appendChild(messageElement);
+            }
+
+            // Function to send message to bot service
+            async function sendMessageToBot(message) {
+                try {
+                    const response = await fetch('http://localhost:5135/api/messages', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json', // Đảm bảo đúng Content-Type
+                        },
+                        body: JSON.stringify({
+                            type: 'message',
+                            text: message
+                        }),
+                    });
+                    console.log(JSON.stringify({
+                        type: 'message',
+                        text: message
+                    }));
+                    console.log('Response from server:', response);
+
+                    if (!response.ok) {
+                        throw new Error(`Server error: ${response.status}, ${response.statusText}`);
+                    }
+
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        const botResponse = await response.json(); // Parse JSON nếu phản hồi là JSON
+                        addMessage('Bot', botResponse.text);
+                    } else {
+                        throw new Error("Invalid content type. Expected JSON.");
+                    }
+
+                } catch (error) {
+                    addMessage('Bot', `Error: ${error.message}`);
+                    console.error('Error:', error);
+                }
+            }
+
+            userInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+
+
+        </script>
+
         <!-- Scroll To Top End Here -->
+        <div id="notification" class="notification hidden"></div>
+        <!-- Modal Xác Nhận Xóa sản phẩm -->
+        <div id="confirmModal" class="modal-confirm">
+            <div class="modal-content-confirm">
+                <span class="close-button-confirm" id="closeModal">&times;</span>
+                <h2>Xác Nhận</h2>
+                <p>Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng không?</p>
+                <button id="confirmYes" class="btn-confirm btn-success-confirm">Có</button>
+                <button id="confirmNo" class="btn-confirm btn-danger-confirm">Không</button>
+            </div>
+        </div>
+        <!-- Modal Xác Nhận Order -->
+        <div id="confirmModalOrder" class="modal-confirm">
+            <div class="modal-content-confirm">
+                <span class="close-button-confirm" id="closeModalOrder">&times;</span>
+                <h2>Xác Nhận</h2>
+                <p>Bạn xác nhận muốn đặt hàng</p>
+                <button id="confirmYesOrder" class="btn-confirm btn-success-confirm">Có</button>
+                <button id="confirmNoOrder" class="btn-confirm btn-danger-confirm">Không</button>
+            </div>
+        </div>
 
     </div>
 
@@ -1066,15 +1179,63 @@
     <script src="/assets//js/plugins/tippy.min.js"></script>
     <script src="/assets//js/plugins/ion.rangeSlider.min.js"></script>
     <script src="/assets//js/plugins/mailchimp-ajax.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <!-- Minify Version -->
     <!-- <script src="/assets//js/vendor.min.js"></script> -->
     <!-- <script src="/assets//js/plugins.min.js"></script> -->
     <!--Main JS (Common Activation Codes)-->
     <script src="/assets//js/main.js"></script>
     <!-- <script src="/assets//js/main.min.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            updateCartCount(); // Gọi hàm này khi trang được tải
+        });
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
 
+            // Thiết lập màu nền dựa trên loại thông báo
+            if (type === 'success') {
+                notification.style.backgroundColor = '#4CAF50'; // Xanh lá cây
+            } else if (type === 'error') {
+                notification.style.backgroundColor = '#f44336'; // Đỏ
+            }
+
+            // Hiển thị thông báo
+            notification.classList.remove('hidden');
+            notification.classList.add('show');
+
+            // Ẩn thông báo sau 3 giây
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.classList.add('hidden');
+                }, 300); // Thời gian khử hiệu ứng
+            }, 3000); // Thời gian hiển thị thông báo
+        }
+
+        function updateCartCount() {
+            // Gửi yêu cầu đến server để đếm số lượng cart
+            $.ajax({
+                url: '/Cart/GetCartCount', // Đường dẫn đến action để lấy số lượng cart
+                type: 'GET',
+                success: function (response) {
+                    if (response.success) {
+                        // Cập nhật số lượng trong giỏ hàng
+                        $('.minicart-wrap .quantity').text(response.count);
+                    } else {
+                        console.error("Không thể lấy số lượng cart.");
+                    }
+                },
+                error: function () {
+                    console.error("Có lỗi xảy ra khi lấy số lượng cart.");
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
 
-   

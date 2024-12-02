@@ -70,19 +70,21 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="product-item">
                             <div class="product-img img-zoom-effect">
-                                <a href="shop.html">
+                                <a href="#">
                                     <img class="img-full" src="assets/images/newsletter/banner_app.jpg"
                                          alt="Product Images">
                                 </a>
                             </div>
                         </div>
                     </div>
-                 @*    @foreach (var product in ViewBag.NewProducts)
+                    @foreach (var item in ViewBag.NewProducts)
                     {
+                        var variant = item.Variant; // Lấy ProductVariant
+                        var product = item.Product;  // Lấy Product tương ứng
                         <div class="col-lg-3 col-md-6 ">
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
-                                    <a href="shop.html">
+                                    <a href="/Product/Detail/@product.Slug">
                                         <img class="img-full"
                                              src="~/imgs/@product.Image"
                                              alt="Product Images">
@@ -93,7 +95,10 @@
                                     <div class="price-box">
                                         <div class="price-box-holder">
                                             <span>Price:</span>
-                                            <span class="new-price text-primary">$130.00</span>
+                                            <span class="new-price text-primary">@String.Format("{0:N0}", variant.Price).Replace(",", ".") đ</span>
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -107,70 +112,49 @@
 
                     }
                     
-                    @foreach(var product in ViewBag.HotProducts)
+                    @foreach(var item in ViewBag.HotProducts)
                     {
-                        <div class="col-lg-3 col-md-6 pt-7">
+                        var variant = item.Variant; // Lấy ProductVariant
+                        var product = item.Product;  // Lấy Product tương ứng
+                        <div class="col-lg-3 col-md-6 " style="margin-top:15px">
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
-                                    <a href="shop.html">
+                                    <a href="/Product/Detail/@product.Slug">
                                         <img class="img-full"
                                              src="~/imgs/@product.Image"
                                              alt="Product Images">
                                     </a>
                                 </div>
                                 <div class="product-content">
-                                    <a class="product-name pb-1" href="">@product.Name</a>
+                                    <a class="product-name pb-1" href="/Product/Detail/@product.Slug">@product.Name</a>
                                     <div class="price-box">
                                         <div class="price-box-holder">
                                             <span>Price:</span>
-                                            <span class="new-price text-primary">$150.00</span>
+                                            <span class="new-price text-primary">@String.Format("{0:N0}", variant.Price).Replace(",", ".") đ</span>
+
+
+
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                    } *@
+                    }
 
-                    @if (ViewBag.Toppings != null && ViewBag.Toppings.Count > 0)
-                    {
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Tên Topping</th>
-                                    <th>Giá</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var topping in ViewBag.Toppings)
-                                {
-                                    <tr>
-                                        <td>@topping.Id</td>
-                                        <td>@topping.Name</td>
-                                        <td>@topping.Price</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <p>Không có topping nào để hiển thị.</p>
-                    }
+                  
                     
                    
                 </div>
             </div>
 
-            <div class="col-12 pt-55">
+           @*  <div class="col-12 pt-55">
                 <div class="button-wrap">
                     <a class="btn btn-link text-danger with-underline p-0" href="shop.html">
                         See More
                         Products
                     </a>
                 </div>
-            </div>
+            </div> *@
         </div>
     </div>
 </div>
@@ -243,7 +227,7 @@
     </div>
 </div>
 <!-- Newsletter Area End Here -->
-<div class="blog-area section-space-y-axis-100" style="background-color:#fff7e6">
+@* <div class="blog-area section-space-y-axis-100" style="background-color:#fff7e6">
     <div class="container">
         <div class="section-title style-2 pb-55">
             <h2 class="title mb-0">Chuyện nhà</h2>
@@ -383,4 +367,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> *@

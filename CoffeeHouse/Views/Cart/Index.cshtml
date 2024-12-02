@@ -5,130 +5,442 @@
 }
 <div class="cart-area section-space-y-axis-100">
     <div class="container">
-        <div class="row">
+
+        <div class="row replace-order-success">
             <div class="col-12">
-                <form action="javascript:void(0)">
-                    <div class="table-content table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="product_remove">remove</th>
-                                    <th class="product-thumbnail">images</th>
-                                    <th class="cart-product-name">Product</th>
-                                    <th class="product-price">Unit Price</th>
-                                    <th class="product-quantity">Quantity</th>
-                                    <th class="product-subtotal">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="product_remove">
-                                        <a href="#">
-                                            <i class="pe-7s-trash" data-tippy="Remove" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
-                                        </a>
-                                    </td>
-                                    <td class="product-thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/product/small-size/2-1-112x112.png" alt="Cart Thumbnail">
-                                        </a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Tail Light</a></td>
-                                    <td class="product-price"><span class="amount">$80.00</span></td>
-                                    <td class="quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
-                                            <div class="dec qtybutton">
-                                                <i class="fa fa-minus"></i>
-                                            </div>
-                                            <div class="inc qtybutton">
-                                                <i class="fa fa-plus"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal"><span class="amount">$80.00</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="product_remove">
-                                        <a href="#">
-                                            <i class="pe-7s-trash" data-tippy="Remove" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
-                                        </a>
-                                    </td>
-                                    <td class="product-thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/product/small-size/2-2-112x112.png" alt="Cart Thumbnail">
-                                        </a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Wiper Blades</a></td>
-                                    <td class="product-price"><span class="amount">$80.00</span></td>
-                                    <td class="quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
-                                            <div class="dec qtybutton">
-                                                <i class="fa fa-minus"></i>
-                                            </div>
-                                            <div class="inc qtybutton">
-                                                <i class="fa fa-plus"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal"><span class="amount">$80.00</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="product_remove">
-                                        <a href="#">
-                                            <i class="pe-7s-trash" data-tippy="Remove" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
-                                        </a>
-                                    </td>
-                                    <td class="product-thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/product/small-size/2-3-112x112.png" alt="Cart Thumbnail">
-                                        </a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Suspension</a></td>
-                                    <td class="product-price"><span class="amount">$80.00</span></td>
-                                    <td class="quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
-                                            <div class="dec qtybutton">
-                                                <i class="fa fa-minus"></i>
-                                            </div>
-                                            <div class="inc qtybutton">
-                                                <i class="fa fa-plus"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal"><span class="amount">$80.00</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="coupon-all">
-                                <div class="coupon">
-                                    <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-                                    <input class="button mt-xxs-30" name="apply_coupon" value="Apply coupon" type="submit">
+                @{
+                    var TotalPrice = 0;
+                }
+                @if (ViewBag.CheckLogin == 1)
+                {
+                    if (ViewBag.CountCart > 0)
+                    {
+                        <form action="javascript:void(0)">
+                            <div class="table-content table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="product_remove">Xóa</th>
+                                            <th class="product-thumbnail">Ảnh</th>
+                                            <th class="cart-product-name">Sản phẩm</th>
+                                            <th class="product-size">Size</th>
+                                            <th class="product-topping">Topping</th>
+                                            <th class="product-price">Giá tiền</th>
+
+                                            <th class="product-quantity">Số lượng</th>
+                                            <th class="product-subtotal">Tổng Giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        @foreach (var item in ViewBag.CartDetails)
+                                        {
+                                            var OnePrice = @item.Cart.TotalPrice / @item.Cart.Quantity;
+                                            <tr data-cart-id="@item.Cart.Id">
+
+                                                <td class="product_remove" data-cart-id="@item.Cart.Id">
+                                                    <a href="#">
+                                                        <i class="pe-7s-trash" data-tippy="Remove" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="product-thumbnail">
+                                                    <a href="#">
+                                                        <img src="~/imgs/@item.Product.Image" alt="Cart Thumbnail">
+                                                    </a>
+                                                </td>
+                                                <td class="product-name" data-provar-id="@item.ProductVariant.Id"><a href="#">@item.Product.Name</a></td>
+                                                <td class="product-size">@item.Size.Size</td>
+                                                <td class="product-toppings">
+                                                    @foreach (var toppingCartId in item.Cart.Topping_Id)
+                                                    {
+                                                        foreach (var topping in ViewBag.toppings)
+                                                        {
+                                                            if (topping.Id == toppingCartId)
+                                                            {
+                                                                <p data-topping-id="@topping.Id" class="itemCartTopping">@topping.Name + @String.Format("{0:N0}", topping.Price).Replace(",", ".") đ</p>
+                                                            }
+                                                          
+                                                        }
+                                                    }
+
+                                                    @if (item.Cart.Topping_Id.Count == 0)
+                                                    {
+                                                        <p style="margin-top:15px">Không có</p>
+                                                    }
+
+                                                    </td>
+                                                <td class="product-price">
+                                                    <span class="amount">@String.Format("{0:N0}", @OnePrice).Replace(",", ".") đ</span>
+                                                </td>
+                                                <td class="quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box" value="@item.Cart.Quantity" type="text">
+                                                        <div class="dec qtybutton">
+                                                            <i class="fa fa-minus"></i>
+                                                        </div>
+                                                        <div class="inc qtybutton">
+                                                            <i class="fa fa-plus"></i>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    <p style="display:none">@TotalPrice=@TotalPrice + @item.Cart.TotalPrice;</p>
+                                                    <span class="amount">@String.Format("{0:N0}", item.Cart.TotalPrice).Replace(",", ".") đ</span>
+                                                </td>
+                                            </tr>
+                                        }
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-12">
+                                    <div class="cart-page-total">
+                                        <h2>Tổng tiền giỏ hàng</h2>
+                                        <ul>
+
+                                            <li>Tổng <span>@String.Format("{0:N0}", TotalPrice).Replace(",", ".") đ</span></li>
+                                        </ul>
+                                        <a href="">Thanh toán</a>
+                                    </div>
                                 </div>
-                                <div class="coupon2">
-                                    <input class="button" name="update_cart" value="Update cart" type="submit">
+                                <div class="col-lg-6 col-12 bill-detail" style="display:none">
+                                    <form action="javascript:void(0)">
+                                        <div class="checkbox-form">
+                                            <h3>Thông tin người nhận</h3>
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="checkout-form-list">
+                                                        <label>Địa chỉ <span class="required">*</span></label>
+                                                        <input id="address" placeholder="" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="checkout-form-list">
+                                                        <label>Quận <span class="required">*</span></label>
+                                                        <input id="district" placeholder="" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="checkout-form-list">
+                                                        <label>Phường <span class="required">*</span></label>
+                                                        <input id="ward" placeholder="" type="text">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="checkout-form-list">
+                                                        <label>Số điện thoại<span class="required">*</span></label>
+                                                        <input id="phone" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="order-button-payment">
+                                                    <input id="placeOrderButton" value="Place order">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 ml-auto">
-                            <div class="cart-page-total">
-                                <h2>Cart totals</h2>
-                                <ul>
-                                    <li>Subtotal <span>$118.60</span></li>
-                                    <li>Total <span>$118.60</span></li>
-                                </ul>
-                                <a href="#">Proceed to checkout</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+
+                        </form>
+                    }
+                    else
+                    {
+                        <h1>Chưa có sản phẩm nào</h1>
+                    }
+                }
+                else
+                {
+                    <h1>Vui lòng đăng nhập để sử dụng giỏ hàng</h1>
+                }
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+
+    // Gửi xác nhận đặt đơn hiện tại
+    $(document).ready(function () {
+        $('#placeOrderButton').on('click', function () {
+            // Hiển thị modal xác nhận bằng cách đặt display thành flex
+            $('#confirmModalOrder').css('display', 'flex'); // Hiển thị modal xác nhận
+
+            // Xử lý khi nhấn "Có" trong modal
+            $('#confirmYesOrder').off('click').on('click', function () {
+                // Lấy giá trị từ các trường input
+                var address = $('#address').val();
+                var district = $('#district').val();
+                var ward = $('#ward').val();
+                var phone = $('#phone').val();
+
+                // Lấy danh sách sản phẩm trong giỏ hàng
+                var products = [];
+
+                $('tbody tr').each(function () {
+                    var product = {};
+
+                    // Lấy Provar_Id
+                    product.Provar_Id = $(this).find('.product-name').data('provar-id');
+
+                    // Lấy danh sách Topping_Id
+                    product.Topping_Ids = [];
+                    $(this).find('.itemCartTopping').each(function () {
+                        var toppingId = $(this).data('topping-id');
+                        product.Topping_Ids.push(toppingId);
+                    });
+
+                    // Lấy Quantity
+                    product.Quantity = $(this).find('.cart-plus-minus-box').val();
+
+                    // Lấy TotalPrice cho từng sản phẩm
+                    var totalPriceText = $(this).find('.product-subtotal .amount').text();
+                    product.TotalPrice = parseFloat(totalPriceText.replace(/\./g, '').replace(' đ', ''));
+
+                    products.push(product);
+                });
+
+                // Lấy CartPrice (tổng tiền giỏ hàng)
+                var cartPriceText = $('.cart-page-total ul li span').text();
+                var cartPrice = parseFloat(cartPriceText.replace(/\./g, '').replace(' đ', ''));
+
+                // Gửi AJAX request để đặt hàng
+                $.ajax({
+                    url: '/Cart/placeOrder', // Đường dẫn đến action placeOrder
+                    type: 'POST',
+                    data: {
+                        address: address,
+                        district: district,
+                        ward: ward,
+                        phone: phone,
+                        products: products, // Danh sách sản phẩm
+                        cartPrice: cartPrice // Tổng tiền giỏ hàng
+                    },
+                    success: function (response) {
+                        // Hiển thị thông báo thành công hoặc điều hướng
+                        showNotification(response.message, 'success');
+                        $('.replace-order-success').replaceWith('<h1>Bạn đã đặt hàng thành công</h1>');
+                        updateCartCount();
+                        $('#confirmModalOrder').css('display', 'none'); // Ẩn modal sau khi gửi đơn hàng thành công
+                    },
+                    error: function (error) {
+                        // Xử lý lỗi
+                        console.error(error);
+                        alert('Error placing order.');
+                        $('#confirmModalOrder').css('display', 'none'); // Ẩn modal sau khi có lỗi
+                    }
+                });
+            });
+
+            // Xử lý khi nhấn "Không" trong modal
+            $('#confirmNoOrder').off('click').on('click', function () {
+                $('#confirmModalOrder').css('display', 'none'); // Ẩn modal nếu người dùng không muốn đặt hàng
+            });
+
+            // Đóng modal khi nhấn vào biểu tượng đóng
+            $('#closeModalOrder').on('click', function () {
+                $('#confirmModalOrder').css('display', 'none'); // Ẩn modal khi nhấn nút đóng
+            });
+        });
+    });
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const paymentButton = document.querySelector(".cart-page-total a");
+        const billDetail = document.querySelector(".bill-detail");
+
+        paymentButton.addEventListener("click", function (event) {
+            event.preventDefault(); // Ngăn không cho link chuyển trang
+
+            if (billDetail.style.display === "none") {
+                billDetail.style.display = "block";  // Hiện bill-detail
+                paymentButton.textContent = "Hủy thanh toán"; // Đổi tên nút
+            } else {
+                billDetail.style.display = "none";  // Ẩn bill-detail
+                paymentButton.textContent = "Thanh toán"; // Đổi tên nút
+            }
+        });
+    });
+
+    // Đổi định dạng, cập nhật tổng tiền, cập nhật số tiền từng sản phẩm, sự kiện tăng giảm số lượng
+    $(document).ready(function () {
+        // Hàm để định dạng số thành dạng "xx.xxx đ"
+        function formatPrice(price) {
+            return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ"; // Làm tròn, thêm dấu chấm phân cách
+        }
+
+        // Hàm cập nhật tổng tiền (Cart totals)
+        function updateCartTotal() {
+            var total = 0;
+            $('.product-subtotal .amount').each(function () {
+                var subtotalText = $(this).text().replace(" đ", "").replace(/\./g, ""); // Xoá ký tự đ và dấu chấm
+                var subtotal = parseFloat(subtotalText); // Chuyển đổi sang dạng số
+                total += subtotal; // Cộng dồn tổng tiền
+            });
+
+            var formattedTotal = formatPrice(total); // Định dạng tổng tiền thành dạng "xx.xxx đ"
+            $('.cart-page-total li span').text(formattedTotal); // Cập nhật tổng tiền trong Cart totals
+        }
+
+        // Function to update subtotal
+        function updateSubtotal(element) {
+            var $row = $(element).closest('tr'); // Lấy dòng hiện tại
+            var quantity = parseInt($row.find('.cart-plus-minus-box').val()); // Lấy số lượng sản phẩm
+            var onePriceText = $row.find('.product-price .amount').text().replace(" đ", "").replace(/\./g, ""); // Loại bỏ ký tự "đ" và dấu chấm
+            var onePrice = parseFloat(onePriceText); // Chuyển sang số
+
+            // Tính tổng giá
+            var subtotal = onePrice * quantity;
+
+            // Định dạng tổng giá (nếu cần)
+            var formattedSubtotal = formatPrice(subtotal);
+
+            // Cập nhật kết quả chỉ hiển thị tổng giá đã định dạng, không hiển thị chuỗi tính toán
+            $row.find('.product-subtotal .amount').text(formattedSubtotal + " ");
+
+            // Cập nhật tổng tiền của giỏ hàng
+            updateCartTotal();
+        }
+
+
+
+        // Sự kiện khi người dùng thay đổi giá trị input trực tiếp
+        $('.cart-plus-minus-box').on('change', function () {
+            updateSubtotal(this); // Cập nhật subtotal khi thay đổi giá trị trong input
+        });
+
+        // Sự kiện khi nhấn vào nút tăng
+        $('.inc.qtybutton').on('click', function () {
+            var $input = $(this).closest('.cart-plus-minus').find('.cart-plus-minus-box');
+            updateSubtotal($input); // Cập nhật subtotal khi nhấn nút tăng
+        });
+
+        // Sự kiện khi nhấn vào nút giảm
+        $('.dec.qtybutton').on('click', function () {
+            var $input = $(this).closest('.cart-plus-minus').find('.cart-plus-minus-box');
+            updateSubtotal($input); // Cập nhật subtotal khi nhấn nút giảm
+        });
+
+        // Gọi hàm cập nhật tổng tiền khi trang được tải lần đầu
+        updateCartTotal();
+    });
+
+
+
+    // $(document).ready(function () {
+    //     // Khi người dùng nhấn vào biểu tượng thùng rác
+    //     $('.product_remove a').on('click', function (event) {
+    //         event.preventDefault(); // Ngăn chặn hành động mặc định (ví dụ: điều hướng)
+
+    //         var cartId = $(this).closest('td').data('cart-id'); // Lấy cartId từ thuộc tính data-cart-id của td
+
+    //         if (confirm("Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng không?")) {
+    //             // Gửi yêu cầu AJAX tới CartController
+    //             $.ajax({
+    //                 url: '/Cart/removeCart', // Đường dẫn đến action removeCart
+    //                 type: 'POST',
+    //                 data: { Cart_Id: cartId }, // Dữ liệu được gửi bao gồm Cart_Id
+    //                 success: function (response) {
+    //                     if (response.success) {
+    //                         // Xóa dòng tr tương ứng với sản phẩm
+    //                         $('tr[data-cart-id="' + cartId + '"]').remove();
+    //                        /*  alert(response.message); */ // Hiển thị thông báo thành công
+    //                         showNotification(response.message, 'success');
+
+    //                     } else {
+    //                         // alert("Xóa sản phẩm không thành công!");
+    //                         showNotification("Xóa sản phẩm không thành công!", 'error');
+    //                     }
+    //                 },
+    //                 error: function () {
+    //                      //alert("Có lỗi xảy ra. Vui lòng thử lại sau!");
+    //                     showNotification("Có lỗi xảy ra. Vui lòng thử lại sau!", 'error');
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
+
+    // Xóa khỏi sản phẩm đã sửa confirm và respone
+    // remove cart
+    $(document).ready(function () {
+
+        function formatPrice(price) {
+            return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ"; // Làm tròn, thêm dấu chấm phân cách
+        }
+
+        // Hàm cập nhật tổng tiền (Cart totals)
+        function updateCartTotal() {
+            var total = 0;
+            $('.product-subtotal .amount').each(function () {
+                var subtotalText = $(this).text().replace(" đ", "").replace(/\./g, ""); // Xoá ký tự đ và dấu chấm
+                var subtotal = parseFloat(subtotalText); // Chuyển đổi sang dạng số
+                total += subtotal; // Cộng dồn tổng tiền
+            });
+
+            var formattedTotal = formatPrice(total); // Định dạng tổng tiền thành dạng "xx.xxx đ"
+            $('.cart-page-total li span').text(formattedTotal); // Cập nhật tổng tiền trong Cart totals
+        }
+        // Khi người dùng nhấn vào biểu tượng thùng rác
+        $('.product_remove a').on('click', function (event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định (ví dụ: điều hướng)
+
+            var cartId = $(this).closest('td').data('cart-id'); // Lấy cartId từ thuộc tính data-cart-id của td
+
+            // Hiển thị modal xác nhận bằng cách đặt display thành flex
+            $('#confirmModal').css('display', 'flex'); // Sử dụng .css() để đặt display thành flex
+
+            // Xử lý nút "Có"
+            $('#confirmYes').off('click').on('click', function () {
+                // Gửi yêu cầu AJAX tới CartController
+                $.ajax({
+                    url: '/Cart/removeCart', // Đường dẫn đến action removeCart
+                    type: 'POST',
+                    data: { Cart_Id: cartId }, // Dữ liệu được gửi bao gồm Cart_Id
+                    success: function (response) {
+                        if (response.success) {
+                            // Xóa dòng tr tương ứng với sản phẩm
+                            $('tr[data-cart-id="' + cartId + '"]').remove();
+                            // Cập nhật số lượng cart
+                            updateCartCount();
+                            updateCartTotal();
+                            // Hiển thị thông báo thành công
+                            showNotification(response.message, 'success');
+                        } else {
+                            showNotification("Xóa sản phẩm không thành công!", 'error');
+                        }
+                    },
+                    error: function () {
+                        showNotification("Có lỗi xảy ra. Vui lòng thử lại sau!", 'error');
+                    }
+                });
+
+                // Đóng modal sau khi xóa
+                $('#confirmModal').css('display', 'none'); // Ẩn modal bằng cách đặt display thành none
+            });
+
+            // Xử lý nút "Không"
+            $('#confirmNo').off('click').on('click', function () {
+                $('#confirmModal').css('display', 'none'); // Đóng modal nếu người dùng không muốn xóa
+            });
+
+            // Đóng modal khi nhấn vào biểu tượng đóng
+            $('#closeModal').on('click', function () {
+                $('#confirmModal').css('display', 'none'); // Ẩn modal khi nhấn nút đóng
+            });
+        });
+    });
+
+
+
+
+</script>

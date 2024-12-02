@@ -5,6 +5,6 @@ namespace CoffeeHouse.Models
 	{
 		public int Id { get; set; }
 		public string Size { get; set; } = string.Empty;
-		public float Price { get; set; }
+		public decimal Price { get; set; }
 	}
 }

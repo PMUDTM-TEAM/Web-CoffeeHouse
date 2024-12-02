@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "p5a5U87BPOe7xCYr4Cs9NQgAZ/6pz73ddRZlZ+1RQzvFfkF1hBEBC32opaopnJzBzIbAJnauMNyMWAjpgzgkXg==",
+  "dgSpecHash": "KqOtWG+V15K6X9SVhDVSR+nN2swJyz0i5479JetalyUsS6JCcH+BekYdzxfTFpxucg6Mod6GJZdrqWpfdMOh4g==",
   "success": true,
   "projectFilePath": "D:\\HK7\\Ứng dụng thông minh\\Đồ án\\Web\\Web-CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
