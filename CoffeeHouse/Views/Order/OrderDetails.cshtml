@@ -8,9 +8,9 @@
                 <table class="table table-hover table-bordered text-center shadow-lg rounded" style="background-color: #f8f9fa;">
                     <thead class="thead-light">
                         <tr>
-                          @*   <th>Order Detail ID</th> *@
                             <th>Product Image</th>
                             <th>Product Name</th>
+                            <th>Size</th>
                             <th>Quantity</th>
                             <th>Toppings</th>
                             <th>Price</th>
@@ -20,17 +20,57 @@
                         @foreach (var detail in Model)
                         {
                             <tr>
-                              @*   <td class="align-middle">@detail.Id</td> *@
-                               @*  <td class="align-middle">
+                                <td class="align-middle">
                                     <img src="~/imgs/@detail.ProductImage" alt="@detail.ProductName" style="max-width: 80px; height: auto; border-radius: 8px; object-fit: cover;" />
                                 </td>
+
                                 <td class="align-middle">@detail.ProductName</td>
-                                <td class="align-middle">@detail.Quantity</td>         
-                                <td class="align-middle">@string.Join(", ", detail.Toppings)</td>
-                                <td class="align-middle">@detail.Price.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td> *@
+
+                                <td class="align-middle">
+                                    @if (!string.IsNullOrEmpty(detail.SizeName))
+                                    {
+                                        @detail.SizeName
+                                        <span class="text-muted">(@detail.SizePrice.ToString("C", new System.Globalization.CultureInfo("vi-VN")))</span>
+                                    }
+                                    else
+                                    {
+                                        @:N/A
+                                    }
+                                </td>
+
+                                <td class="align-middle">@detail.Quantity</td>
+
+                                <td class="align-middle">
+                                    @if (detail.Toppings != null && detail.Toppings.Any())
+                                    {
+                                        @foreach (var topping in detail.Toppings)
+                                        {
+                                            <div>@topping</div>
+                                        }
+                                        <span class="text-muted">(@detail.ToppingsPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN")))</span>
+                                    }
+                                    else
+                                    {
+                                        @:None
+                                    }
+                                </td>
+
+                                <td class="align-middle">
+                                    <strong>@detail.Price.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</strong>
+                                </td>
                             </tr>
                         }
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-right"><strong>Tổng tiền:</strong></td>
+                            <td class="align-middle">
+                                <strong>
+                                    @Model.Sum(detail => detail.Price).ToString("C", new System.Globalization.CultureInfo("vi-VN"))
+                                </strong>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

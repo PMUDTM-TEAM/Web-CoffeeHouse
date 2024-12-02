@@ -32,6 +32,47 @@ namespace CoffeeHouse.Controllers.User
             return View(orders);
         }
 
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            int userId = int.Parse(userIdString);
+            var order = await _orderService.GetOrderById(orderId);
+
+            if (order == null || order.A_Id != userId)
+            {
+                TempData["ErrorMessage"] = "Order not found or you are not authorized to cancel this order.";
+                return RedirectToAction("Detail");
+            }
+
+            if (order.Status == "Pending")
+            {
+                bool isCanceled = await _orderService.CancelOrderAsync(orderId);
+
+                if (isCanceled)
+                {
+                    TempData["SuccessMessage"] = "Your order has been canceled.";
+
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Unable to cancel the order. It may already be processed.";
+                }
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Only orders in 'Pending' status can be canceled.";
+            }
+
+            return RedirectToAction("Detail");
+        }
+
+
+
 
         public async Task<IActionResult> Register(Register model)
         {
