@@ -198,6 +198,49 @@ namespace CoffeeHouse.Service
                 return false;
             }
         }
+        public async Task<List<Orders>> GetOrdersByEmailAsync(string email)
+        {
+            string query = @"
+        SELECT Id, TotalPrice, Status, PaymentStatus, PaymentMethod, Address_Id, A_Id, CreatedAt
+        FROM [Order] o
+        INNER JOIN Account a ON o.A_Id = a.Id
+        WHERE a.Email = @Email";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectDB.GetConnectionString()))
+                {
+                    await conn.OpenAsync();
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                    var orders = new List<Orders>();
+
+                    while (await reader.ReadAsync())
+                    {
+                        orders.Add(new Orders
+                        {
+                            Id = reader.GetInt32(0),
+                            TotalPrice = reader.GetDecimal(1),
+                            Status = reader.GetString(2),
+                            PaymentStatus = reader.GetString(3),
+                            PaymentMethod = reader.GetString(4),
+                            Address_Id = reader.GetInt32(5),
+                            A_Id = reader.GetInt32(6),
+                            CreatedAt = reader.GetDateTime(7)
+                        });
+                    }
+
+                    return orders;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return new List<Orders>();
+            }
+        }
 
     }
 }

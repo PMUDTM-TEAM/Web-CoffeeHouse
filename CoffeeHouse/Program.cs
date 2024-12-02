@@ -15,9 +15,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Đăng ký Bot Framework Adapter và Chatbot Service
-builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
-builder.Services.AddTransient<IBot, ChatbotService>();
 
 builder.Services.AddCors(options =>
 {
