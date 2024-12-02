@@ -60,11 +60,16 @@
                                                             {
                                                                 <p data-topping-id="@topping.Id" class="itemCartTopping">@topping.Name + @String.Format("{0:N0}", topping.Price).Replace(",", ".") đ</p>
                                                             }
+                                                          
                                                         }
                                                     }
-                                                    
 
-                                                </td>
+                                                    @if (item.Cart.Topping_Id.Count == 0)
+                                                    {
+                                                        <p style="margin-top:15px">Không có</p>
+                                                    }
+
+                                                    </td>
                                                 <td class="product-price">
                                                     <span class="amount">@String.Format("{0:N0}", @OnePrice).Replace(",", ".") đ</span>
                                                 </td>
