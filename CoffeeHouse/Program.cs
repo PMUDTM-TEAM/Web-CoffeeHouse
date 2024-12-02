@@ -1,7 +1,6 @@
 ﻿using CoffeeHouse.Service;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder;
-using OrderHighLand.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);

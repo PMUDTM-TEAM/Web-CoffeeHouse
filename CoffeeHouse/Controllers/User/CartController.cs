@@ -162,8 +162,6 @@ namespace CoffeeHouse.Controllers.User
             int Address_Id = await addressService.GetAddressIdMaxByAIdAsync(A_Id);
             var order = new Orders
             {
-              
-                Date = DateTime.Now,
                 Status = "Pending",
                 A_Id = A_Id,
                 TotalPrice = cartPrice,

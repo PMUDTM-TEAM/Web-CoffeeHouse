@@ -159,8 +159,8 @@ namespace CoffeeHouse.Service
         public async Task AddToOrderAsync(Orders order)
         {
             string query = @"
-                    INSERT INTO [Order] (Date, Status, TotalPrice, Address_Id, A_Id)
-                    VALUES (@Date, @Status, @TotalPrice, @Address_Id, @A_Id)";
+                    INSERT INTO [Order] (Status, TotalPrice, Address_Id, A_Id)
+                    VALUES (@Status, @TotalPrice, @Address_Id, @A_Id)";
 
             var connectionString = _connectDB.GetConnectionString();  // Lấy chuỗi kết nối từ _connectDB
 
@@ -173,7 +173,6 @@ namespace CoffeeHouse.Service
                     using (var command = new SqlCommand(query, connection))
                     {
                         // Thêm các tham số vào câu lệnh SQL
-                        command.Parameters.AddWithValue("@Date", order.Date);
                         command.Parameters.AddWithValue("@Status", order.Status);
                         command.Parameters.AddWithValue("@TotalPrice", order.TotalPrice);
                         command.Parameters.AddWithValue("@Address_Id", order.Address_Id);
@@ -192,7 +191,7 @@ namespace CoffeeHouse.Service
 
 
         // Method to get the maximum Order ID from SQL Server
-        public async Task<int> GetMaxIdOrder()
+    
 
         public async Task<Orders> GetOrderById(int orderId)
         {
