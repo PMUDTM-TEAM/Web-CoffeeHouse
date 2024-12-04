@@ -1,5 +1,6 @@
 ﻿using CoffeeHouse.Models;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -140,6 +141,48 @@ namespace CoffeeHouse.Service
 
             return productVariants;
         }
+
+        public async Task<List<string>> GetSizesByProductNameAsync(string productName)
+        {
+            var sizes = new List<string>();
+            var query = @"
+    SELECT DISTINCT s.Size
+    FROM ProductVariant pv
+    INNER JOIN Size s ON pv.Size_Id = s.Id
+    INNER JOIN Product p ON pv.Pro_Id = p.Id
+    WHERE p.Name LIKE @ProductName";  // Sử dụng LIKE và tham số chuẩn
+
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add("@ProductName", SqlDbType.NVarChar).Value = "%" + productName + "%";  // Đảm bảo sử dụng NVarChar cho Unicode
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                var sizeName = reader.GetString(0);
+                                sizes.Add(sizeName);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy dữ liệu kích cỡ: {ex.Message}");
+            }
+
+            return sizes;
+        }
+
 
     }
 }

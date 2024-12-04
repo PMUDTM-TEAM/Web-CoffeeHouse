@@ -1,5 +1,6 @@
 ﻿using CoffeeHouse.Models;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -245,5 +246,46 @@ namespace CoffeeHouse.Service
 
             return products;
         }
+
+        public async Task<decimal?> GetProductPriceByNameAndSizeAsync(string productName, string size)
+        {
+            var query = @"
+    SELECT pv.Price
+    FROM Product p
+    INNER JOIN ProductVariant pv ON p.Id = pv.Pro_Id
+    INNER JOIN Size s ON pv.Size_Id = s.Id
+    WHERE p.Name = @productName
+    AND s.Size = @size;
+";
+
+
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // Thêm tham số vào câu lệnh SQL
+                        command.Parameters.Add(new SqlParameter("@productName", SqlDbType.NVarChar) { Value = productName });
+                        command.Parameters.Add(new SqlParameter("@size", SqlDbType.NVarChar) { Value = size });
+
+
+                        var result = await command.ExecuteScalarAsync();
+                        return result != DBNull.Value ? (decimal?)result : null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Database query error: {ex.Message}");
+                return null;
+            }
+        }
+
+
     }
 }
