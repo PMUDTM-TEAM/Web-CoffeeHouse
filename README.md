@@ -90,40 +90,7 @@ Tích hợp giữa giao diện web và ứng dụng WinForm trong hệ thống C
                 <td>Chức năng thanh toán</td>
                 <td></td>
             </tr>
-           <tr>
-                <td>7</td>
-                <td>Quản lý sản phẩm</td>
-                <td></td>
-            </tr>
-           <tr>
-                <td>8</td>
-                <td>Quản lý người dùng</td>
-                <td></td>
-            </tr>
         </tbody>
     </table>
 
-**Winform**
-
-<table>
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Nghiệp vụ</th>
-                <th>Phân công</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Quản lý đơn hàng</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Thống kê doanh thu</td>
-                <td></td>
-            </tr>   
-        </tbody>
-    </table>
 
