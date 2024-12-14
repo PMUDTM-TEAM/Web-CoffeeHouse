@@ -55,43 +55,48 @@ Tích hợp giữa giao diện web và ứng dụng WinForm trong hệ thống C
             </tr>
         </thead>
         <tbody>
-            <tr>
+           <tr>
                 <td>1</td>
+                <td>Đăng nhập phân quyền</td>
+                <td>Phạm Trần Quang Thắng</td>
+            </tr>
+            <tr>
+                <td>2</td>
                 <td>Xem thông tin trang chủ</td>
                 <td>Nguyễn Trương Điền</td>
             </tr>
             <tr>
-                <td>2</td>
+                <td>3</td>
                 <td>Xem thông tin trang danh mục sản phẩm</td>
                 <td>Nguyễn Trương Điền</td>
             </tr>
           <tr>
-                <td>3</td>
+                <td>4</td>
                 <td>Xem thông tin trang chi tiết sản phẩm</td>
                 <td>Nguyễn Trương Điền</td>
             </tr>
           <tr>
-                <td>4</td>
+                <td>5</td>
                 <td>Xem thông tin trang trạng thái đơn hàng của người dùng</td>
                 <td>Phạm Trần Quang Thắng</td>
             </tr>
           <tr>
-                <td>5</td>
+                <td>6</td>
                 <td>Chức năng giỏ hàng</td>
                 <td>Nguyễn Trương Điền</td>
             </tr>
           <tr>
-                <td>6</td>
+                <td>7</td>
                 <td>Chức năng tìm kiếm lọc sản phẩm trong trang danh sách sản phẩm</td>
                 <td>Nguyễn Trương Điền</td>
             </tr>
           <tr>
-                <td>7</td>
+                <td>8</td>
                 <td>Chức năng hủy đơn hàng từ phía người dùng</td>
                 <td>Phạm Trần Quang Thắng</td>
             </tr>
           <tr>
-                <td>8</td>
+                <td>9</td>
                 <td>AI Chat box tư vấn khách hàng</td>
                 <td>Phạm Trần Quang Thắng</td>
             </tr>
