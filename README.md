@@ -90,6 +90,11 @@ Tích hợp giữa giao diện web và ứng dụng WinForm trong hệ thống C
                 <td>Chức năng hủy đơn hàng từ phía người dùng</td>
                 <td>Phạm Trần Quang Thắng</td>
             </tr>
+          <tr>
+                <td>8</td>
+                <td>AI Chat box tư vấn khách hàng</td>
+                <td>Phạm Trần Quang Thắng</td>
+            </tr>
         </tbody>
     </table>
 
