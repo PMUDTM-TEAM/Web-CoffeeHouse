@@ -53,7 +53,7 @@
         <header class="main-header-area">
 
             <div class="header-top border-bottom d-none d-lg-block">
-                <div class="container">
+             @*    <div class="container">
                     <div class="row align-items-center">
                         <div class="col-6">
                             <div class="header-top-left">
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> *@
             </div>
             <div class="header-middle header-sticky py-6 py-lg-0">
                 <div class="container">
@@ -117,7 +117,7 @@
                                                 </a>
                                             </li>
                                             <li class="drop-holder">
-                                                <a href="">
+                                                <a href="@Url.Action("Index", "Category", new { type = "tra" })">
                                                     Trà
 
                                                 </a>
@@ -147,9 +147,10 @@
                                                 <i class="pe-7s-user"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
-                                                <li><a class="dropdown-item" href="/Account/Detail">My account</a></li>
+                               
                                                 @if (ViewContext.HttpContext.Session.GetString("UserName") != null)
                                                 {
+                                                    <li><a class="dropdown-item" href="/Account/Detail">My account</a></li>
                                                     <li>
                                                         <span class="dropdown-item">
                                                             Xin chào @ViewContext.HttpContext.Session.GetString("UserName")
@@ -1036,7 +1037,7 @@
         </div>
         <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
         <df-messenger intent="WELCOME"
-                      chat-title="CoffeeHouseAgent"
+                      chat-title="CoffeeHouse"
                       agent-id="ad9ba92d-1d65-4df6-88fa-9bfde75ad4bf"
                       language-code="vi"></df-messenger>
 
@@ -1069,6 +1070,16 @@
                 <p>Bạn xác nhận muốn đặt hàng</p>
                 <button id="confirmYesOrder" class="btn-confirm btn-success-confirm">Có</button>
                 <button id="confirmNoOrder" class="btn-confirm btn-danger-confirm">Không</button>
+            </div>
+        </div>
+
+        <div id="errorModal" class="modalOutProduct">
+            <div class="modalOutProduct-content">
+                <h2>Thông báo</h2>
+                <p id="modalText">Đây là nội dung thông báo.</p>
+                <p>Xin quý khách giảm số lượng sản phẩm hoặc chọn sản phẩm khác!</p>
+                <p>Xin chân thành xin lỗi quý khách</p>
+                <button class="btn-ok" onclick="closeModal()">OK</button>
             </div>
         </div>
 
@@ -1150,6 +1161,11 @@
                     console.error("Có lỗi xảy ra khi lấy số lượng cart.");
                 }
             });
+        }
+        // Đóng modal
+        function closeModal() {
+            const modal = document.getElementById("errorModal");
+            modal.style.display = "none"; // Ẩn modal
         }
     </script>
 </body>

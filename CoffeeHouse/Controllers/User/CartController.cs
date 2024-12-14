@@ -146,6 +146,39 @@ namespace CoffeeHouse.Controllers.User
         [HttpPost]
         public async Task<IActionResult> placeOrder(string address, string district, string ward, string phone, decimal cartPrice, List<ProductOrder> products)
         {
+            foreach (var product in products)
+            {
+                (int check, int remainingQuantity, string productName, string sizeName) result = await productVariantService.checkQuantityProvar(product.Provar_Id, product.Quantity);
+                int check = result.check;
+                int remainingQuantity = result.remainingQuantity;
+                string productName = result.productName;
+                string sizeName = result.sizeName;
+                if (check == 0)
+                {
+                    if (remainingQuantity > 0)
+                    {
+                        // Sản phẩm vượt mức số lượng còn lại
+                        return Json(new
+                        {
+                            success = false,
+                            message = $"Sản phẩm '{productName}' với Size '{sizeName}' đã vượt mức số lượng còn lại trong cửa hàng. Còn lại: {remainingQuantity}."
+                        });
+                    }
+                    else
+                    {
+                        // Sản phẩm hết hàng
+                        return Json(new
+                        {
+                            success = false,
+                            message = $"Sản phẩm '{productName}' với Size '{sizeName}' đã hết hàng trong cửa hàng."
+                        });
+                    }
+                }
+
+
+            }
+
+
             var userId = HttpContext.Session.GetString("UserId");
             int A_Id = int.Parse(userId);
             //int Address_Id = await addressService.getAddressIdMax() + 1;
@@ -188,6 +221,9 @@ namespace CoffeeHouse.Controllers.User
                     Order_Id = Order_Id
                 };
                 await orderService.addToOrderDetail(orderDetail);
+
+                await productVariantService.removeQuantityWhenBy(product.Provar_Id, quantity);
+
                 int orderDetail_Id = await orderService.GetOrderDetailIdMaxByOrderIdAsync(Order_Id);
 
                 if (toppingIds != null && toppingIds.Count > 0)

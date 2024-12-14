@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SH50U0Gdytrbs62Nh3vsPmtYU3Fg6tp13eFYSh5bQoWkB8ZQCS4cYbRwebXJsxEPRSvWIYUqXwWcvArGwXwIKg==",
+  "dgSpecHash": "+XwqU7rLIpg9e19XpAYzAmEDnh1o1k4QTTa0t4T5VdiboE2RzXos1zcTXTB5LkxYkqTbMqRmvHfTd3IHGYQ6Aw==",
   "success": true,
   "projectFilePath": "D:\\Các Môn HK7\\PT_PMUDTM\\CoffeeHouse\\Web-CoffeeHouse\\CoffeeHouse\\CoffeeHouse.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\fuzzysharp\\2.0.2\\fuzzysharp.2.0.2.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.bot.builder\\4.22.9\\microsoft.bot.builder.4.22.9.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.bot.builder.integration.aspnet.core\\4.22.9\\microsoft.bot.builder.integration.aspnet.core.4.22.9.nupkg.sha512",
