@@ -58,37 +58,37 @@ Tích hợp giữa giao diện web và ứng dụng WinForm trong hệ thống C
             <tr>
                 <td>1</td>
                 <td>Xem thông tin trang chủ</td>
-                <td></td>
+                <td>Nguyễn Trương Điền</td>
             </tr>
             <tr>
                 <td>2</td>
                 <td>Xem thông tin trang danh mục sản phẩm</td>
-                <td></td>
+                <td>Nguyễn Trương Điền</td>
             </tr>
           <tr>
                 <td>3</td>
                 <td>Xem thông tin trang chi tiết sản phẩm</td>
-                <td></td>
-            </tr>
-          <tr>
-                <td>3</td>
-                <td>Xem thông tin trang trạng thái đơn hàng</td>
-                <td></td>
+                <td>Nguyễn Trương Điền</td>
             </tr>
           <tr>
                 <td>4</td>
-                <td>Chức năng giỏ hàng</td>
-                <td></td>
+                <td>Xem thông tin trang trạng thái đơn hàng của người dùng</td>
+                <td>Phạm Trần Quang Thắng</td>
             </tr>
           <tr>
                 <td>5</td>
-                <td>Chức năng tìm kiếm</td>
-                <td></td>
+                <td>Chức năng giỏ hàng</td>
+                <td>Nguyễn Trương Điền</td>
             </tr>
           <tr>
                 <td>6</td>
-                <td>Chức năng thanh toán</td>
-                <td></td>
+                <td>Chức năng tìm kiếm lọc sản phẩm trong trang danh sách sản phẩm</td>
+                <td>Nguyễn Trương Điền</td>
+            </tr>
+          <tr>
+                <td>7</td>
+                <td>Chức năng hủy đơn hàng từ phía người dùng</td>
+                <td>Phạm Trần Quang Thắng</td>
             </tr>
         </tbody>
     </table>
