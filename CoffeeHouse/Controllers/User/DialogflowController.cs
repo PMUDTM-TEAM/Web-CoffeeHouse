@@ -1,4 +1,5 @@
-﻿using CoffeeHouse.Models;
+﻿using Azure;
+using CoffeeHouse.Models;
 using CoffeeHouse.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -11,10 +12,66 @@ namespace CoffeeHouse.Controllers.User
     public class DialogflowController : Controller
     {
         private readonly UserService _userService;
+        private readonly ProductVariantService _productVariantService;
+        private readonly ProductService _productService;
+        private readonly OrderService _orderService;
 
-        public DialogflowController(UserService userService)
+
+        [HttpGet("dynamic-entities")]
+        public async Task<IActionResult> GetDynamicEntities()
+        {
+            try
+            {
+                var products = await _productService.GetAllProductNamesAsync();
+                var sizes = await _productService.GetAllSizeNamesAsync();
+
+                var dynamicEntities = new
+                {
+                    name = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/api/Dialogflow/dynamic-entities",
+                    lifespanCount = 50,
+                    parameters = new
+                    {
+                        entities = new[]
+                        {
+                    new
+                    {
+                        name = "ProductName",
+                        entries = products.Select(p => new
+                        {
+                            value = p,
+                            synonyms = new[] { p }
+                        }).ToArray()
+                    },
+                    new
+                    {
+                        name = "Size",
+                        entries = sizes.Select(s => new
+                        {
+                            value = s,
+                            synonyms = new[] { s }
+                        }).ToArray()
+                    }
+                }
+                    }
+                };
+
+                return Ok(new
+                {
+                    fulfillmentText = "Dữ liệu dynamic entities được cập nhật thành công.",
+                    outputContexts = new[] { dynamicEntities }
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi khi cập nhật dynamic entities: {ex.Message}");
+            }
+        }
+        public DialogflowController(UserService userService, ProductService productService, ProductVariantService productVariantService, OrderService orderService)
         {
             _userService = userService;
+            _productService = productService;
+            _productVariantService = productVariantService;
+            _orderService = orderService;
         }
 
         [HttpPost("webhook")]
@@ -35,56 +92,279 @@ namespace CoffeeHouse.Controllers.User
 
             string intentName = intent.GetProperty("displayName").GetString();
             string fulfillmentText;
+            JsonElement parameters;
 
             // Xử lý các intent khác nhau
             switch (intentName)
             {
+                case "Default Welcome Intent":
+                    try
+                    {
+                        var products = await _productService.GetAllProductNamesAsync();
+                        var sizes = await _productService.GetAllSizeNamesAsync();
+
+                        // Tạo Dynamic Entities Context
+                        var dynamicEntities = new
+                        {
+                            name = $"{req.GetProperty("session").GetString()}/contexts/_dialogflow_dynamic_entities_",
+                        lifespanCount = 50, // thời gian tồn tại trong phiên
+                            parameters = new
+                            {
+                                entities = new[]
+                                {
+                            new
+                            {
+                                name = "ProductName",
+                                entries = products.Select(p => new
+                                {
+                                    value = p,
+                                    synonyms = new[] { p }
+                                }).ToArray()
+                            },
+                            new
+                            {
+                                name = "Size",
+                                entries = sizes.Select(s => new
+                                {
+                                    value = s,
+                                    synonyms = new[] { s }
+                                }).ToArray()
+                            }
+                        }
+                            }
+
+                        };
+                        Console.WriteLine("Response to Dialogflow:");
+                        Console.WriteLine(JsonSerializer.Serialize(new
+                        {
+                            fulfillmentText = "Chào mừng bạn đến với CoffeeHouse! Tôi có thể giúp gì cho bạn?",
+                            outputContexts = new[] { dynamicEntities }
+                        }, new JsonSerializerOptions { WriteIndented = true }));
+
+                        return Ok(new
+                        {
+                            fulfillmentText = "Chào mừng bạn đến với CoffeeHouse! Tôi có thể giúp gì cho bạn?",
+                            outputContexts = new[] { dynamicEntities }
+                        });
+
+                    }
+                    catch (Exception ex)
+                    {
+                        return StatusCode(500, $"Lỗi khi tải dữ liệu dynamic entities: {ex.Message}");
+                    }
+
                 case "xinchao":
                     fulfillmentText = "Xin chào! Tôi có thể giúp gì cho bạn?";
                     break;
 
-                case "GetUserInfoByEmail":
-                    // Kiểm tra và lấy email từ `parameters` nếu có
-                    string email = string.Empty;
-                    if (queryResult.TryGetProperty("parameters", out JsonElement parameters) &&
-                        parameters.TryGetProperty("email", out JsonElement emailElement) &&
-                        emailElement.ValueKind == JsonValueKind.String && !string.IsNullOrEmpty(emailElement.GetString()))
+                case "information":
+                    try
                     {
-                        email = emailElement.GetString();
-                    }
-                    else
-                    {
-                        // Nếu không có email trong parameters, kiểm tra thủ công trong `queryText` bằng Regex
-                        string queryText = queryResult.GetProperty("queryText").GetString();
-                        var match = Regex.Match(queryText, @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}");
-
-                        if (match.Success)
+                        var products = await _productService.GetAllAsync();
+                        if (products.Count > 0)
                         {
-                            email = match.Value; // Lấy email từ queryText
-                            Console.WriteLine("Email found manually: " + email);
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(email))
-                    {
-                        // Gọi UserService để lấy thông tin tài khoản theo email
-                        var account = await _userService.GetUserByEmailAsync(email);
-                        if (account != null)
-                        {
-                            fulfillmentText = $"Thông tin tài khoản: Tên - {account.A_NAME}, Email - {account.A_EMAIL}, Role ID - {account.ROLE_ID}.";
+                            var productNames = string.Join(", ", products.Select(p => p.Name));
+                            fulfillmentText = $"Chúng tôi có các loại nước sau: {productNames}.";
                         }
                         else
                         {
-                            fulfillmentText = "Không tìm thấy tài khoản với email này.";
+                            fulfillmentText = "Hiện tại không có sản phẩm nào trong kho.";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        fulfillmentText = $"Có lỗi khi lấy dữ liệu sản phẩm: {ex.Message}";
+                    }
+                    break;
+
+                    case "ProductPrice":
+                        string productName = string.Empty;
+                        string size = string.Empty;
+
+
+                        if (queryResult.TryGetProperty("parameters", out parameters))
+                        {
+
+                        if (parameters.TryGetProperty("productName", out JsonElement productNameElement))
+                        {
+                            if (productNameElement.ValueKind == JsonValueKind.Array)
+                            {
+                                productName = string.Join(" ", productNameElement.EnumerateArray().Select(x => x.GetString()));
+                            }
+                            else
+                            {
+                                productName = productNameElement.GetString();
+                            }
+                        }
+
+
+                        if (parameters.TryGetProperty("size", out JsonElement sizeElement) &&
+                                sizeElement.ValueKind == JsonValueKind.String && !string.IsNullOrEmpty(sizeElement.GetString()))
+                            {
+                                size = sizeElement.GetString();
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(productName))
+                        {
+                            fulfillmentText = "Vui lòng cung cấp tên sản phẩm để tôi có thể tìm giá cho bạn.";
+                        }
+                        else if (string.IsNullOrEmpty(size))
+                        {
+
+                            var sizes = await _productVariantService.GetSizesByProductNameAsync(productName);
+
+                            if (sizes.Any())
+                            {
+                                var sizeList = string.Join(", ", sizes);
+                                fulfillmentText = $"Sản phẩm {productName} có các kích thước sau: {sizeList}. Bạn muốn xem giá của kích thước nào?";
+                            }
+                            else
+                            {
+                                fulfillmentText = $"Không tìm thấy kích thước nào cho sản phẩm {productName}.";
+                            }
+                        }
+                        else
+                        {
+                            var productPrice = await _productService.GetProductPriceByNameAndSizeAsync(productName, size);
+                            if (productPrice.HasValue)
+                            {
+                                fulfillmentText = $"Giá của sản phẩm {productName} kích cỡ {size} là {productPrice.Value} VND.";
+                            }
+                            else
+                            {
+                                fulfillmentText = $"Không tìm thấy giá của sản phẩm {productName} kích cỡ {size}.";
+                            }
+                        }
+                    break;
+
+                case "SizeProduct":
+                    string productNameSize = string.Empty;
+
+                    if (queryResult.TryGetProperty("parameters", out parameters))
+                    {
+                        if (parameters.TryGetProperty("productNameSize", out JsonElement productNameElement) &&
+                            productNameElement.ValueKind == JsonValueKind.String)
+                        {
+                            productNameSize = productNameElement.GetString();
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(productNameSize))
+                    {
+                        var sizes = await _productVariantService.GetSizesByProductNameAsync(productNameSize);
+
+                        if (sizes.Any())
+                        {
+                            var sizeList = string.Join(", ", sizes);
+                            fulfillmentText = $"Các kích cỡ của sản phẩm {productNameSize} là: {sizeList}.";
+                        }
+                        else
+                        {
+                            fulfillmentText = $"Không tìm thấy kích cỡ nào cho sản phẩm {productNameSize}.";
                         }
                     }
                     else
                     {
-                        fulfillmentText = "Không nhận diện được email. Vui lòng thử lại.";
+                        fulfillmentText = "Vui lòng cung cấp tên sản phẩm để tôi có thể tìm kích cỡ cho bạn.";
                     }
+
                     break;
 
+                case "ProductType":
+                    string productType = string.Empty;
 
+                    if (queryResult.TryGetProperty("parameters", out parameters))
+                    {
+                        if (parameters.TryGetProperty("productType", out JsonElement productTypeElement) &&
+                            productTypeElement.ValueKind == JsonValueKind.String)
+                        {
+                            productType = productTypeElement.GetString();
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(productType))
+                    {
+                        fulfillmentText = "Vui lòng cung cấp loại sản phẩm (Hot, New, Best Seller) để tôi có thể giúp bạn.";
+                    }
+                    else
+                    {
+                        try
+                        {
+
+                            var products = new List<Products>();
+
+                            if (productType.Equals("Hot", StringComparison.OrdinalIgnoreCase))
+                            {
+                                products = await _productService.GetFourHotProduct();
+                            }
+                            else if (productType.Equals("New", StringComparison.OrdinalIgnoreCase))
+                            {
+                                products = await _productService.GetTwoNewProduct();
+                            }
+                            else
+                            {
+                                fulfillmentText = $"Hiện tại chúng tôi chỉ hỗ trợ các loại sản phẩm: Hot, New.";
+                            }
+
+                            if (products.Any())
+                            {
+                                var productNames = string.Join(", ", products.Select(p => p.Name));
+                                fulfillmentText = $"Các sản phẩm {productType} của chúng tôi là: {productNames}.";
+                            }
+                            else
+                            {
+                                fulfillmentText = $"Không tìm thấy sản phẩm nào thuộc loại {productType}.";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            fulfillmentText = $"Có lỗi xảy ra khi lấy dữ liệu sản phẩm: {ex.Message}";
+                        }
+                    }
+                    break;
+                case "OrderStatus-collectEmail":
+                    string email = string.Empty;
+
+                    if (queryResult.TryGetProperty("parameters", out parameters))
+                    {
+                        if (parameters.TryGetProperty("email", out JsonElement emailElement) &&
+                            emailElement.ValueKind == JsonValueKind.String)
+                        {
+                            email = emailElement.GetString();
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(email))
+                    {
+                        fulfillmentText = "Vui lòng cung cấp email hợp lệ để kiểm tra đơn hàng.";
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var orders = await _orderService.GetOrdersByEmailAsync(email);
+                            if (orders.Any())
+                            {
+                                var orderDetails = string.Join("\n\n", orders.Select(o =>
+        $"🔹 **Đơn hàng #{o.Id}:**\n" +
+        $"- **Trạng thái:** {o.Status}\n" +
+        $"- **Tổng tiền:** {o.TotalPrice:N0} VND\n" +
+        $"- **Ngày đặt:** {o.CreatedAt:dd/MM/yyyy}"
+    ));
+                                fulfillmentText = $"Danh sách đơn hàng của bạn:\n{orderDetails}";
+                            }
+                            else
+                            {
+                                fulfillmentText = $"Không tìm thấy đơn hàng nào liên kết với email {email}.";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            fulfillmentText = $"Có lỗi xảy ra khi kiểm tra đơn hàng: {ex.Message}";
+                        }
+                    }
+                    break;
 
 
                 default:
@@ -92,8 +372,9 @@ namespace CoffeeHouse.Controllers.User
                     break;
             }
 
-            var response = new { fulfillmentText = fulfillmentText };
-            return Ok(response);
+            var Response = new { fulfillmentText = fulfillmentText };
+            return Ok(Response);
         }
+
     }
 }

@@ -225,11 +225,17 @@
                         cartPrice: cartPrice // Tổng tiền giỏ hàng
                     },
                     success: function (response) {
-                        // Hiển thị thông báo thành công hoặc điều hướng
-                        showNotification(response.message, 'success');
-                        $('.replace-order-success').replaceWith('<h1>Bạn đã đặt hàng thành công</h1>');
-                        updateCartCount();
-                        $('#confirmModalOrder').css('display', 'none'); // Ẩn modal sau khi gửi đơn hàng thành công
+                        if (response.success) {
+                            // Hiển thị thông báo thành công hoặc điều hướng
+                            showNotification(response.message, 'success');
+                            $('.replace-order-success').replaceWith('<h1>Bạn đã đặt hàng thành công</h1>');
+                            updateCartCount();
+                            $('#confirmModalOrder').css('display', 'none'); // Ẩn modal sau khi gửi đơn hàng thành công
+                        } else {
+                            $('#confirmModalOrder').css('display', 'none');
+                            // Nếu success = false, hiển thị thông báo lỗi
+                            showModal(response.message);
+                        }
                     },
                     error: function (error) {
                         // Xử lý lỗi
@@ -249,6 +255,14 @@
             $('#closeModalOrder').on('click', function () {
                 $('#confirmModalOrder').css('display', 'none'); // Ẩn modal khi nhấn nút đóng
             });
+
+            function showModal(message) {
+                const modal = document.getElementById("errorModal");
+                const modalText = document.getElementById("modalText");
+                modalText.textContent = message; // Gán nội dung thông báo lỗi
+                modal.style.display = "flex"; // Hiển thị modal (flex để căn giữa)
+            }
+
         });
     });
 

@@ -1,8 +1,8 @@
 ﻿using CoffeeHouse.Models;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-
 namespace CoffeeHouse.Service
 {
     public class ProductService
@@ -245,5 +245,149 @@ namespace CoffeeHouse.Service
 
             return products;
         }
+
+        public async Task<decimal?> GetProductPriceByNameAndSizeAsync(string productName, string size)
+        {
+            var query = @"
+    SELECT pv.Price
+    FROM Product p
+    INNER JOIN ProductVariant pv ON p.Id = pv.Pro_Id
+    INNER JOIN Size s ON pv.Size_Id = s.Id
+    WHERE p.Name = @productName
+    AND s.Size = @size;
+";
+
+
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // Thêm tham số vào câu lệnh SQL
+                        command.Parameters.Add(new SqlParameter("@productName", SqlDbType.NVarChar) { Value = productName });
+                        command.Parameters.Add(new SqlParameter("@size", SqlDbType.NVarChar) { Value = size });
+
+
+                        var result = await command.ExecuteScalarAsync();
+                        return result != DBNull.Value ? (decimal?)result : null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Database query error: {ex.Message}");
+                return null;
+            }
+        }
+
+
+        public async Task<List<Products>> GetProductNamesByTypeAsync(string type)
+        {
+            var products = new List<Products>();
+            var query = "SELECT Name, Type FROM Product WHERE Type = @Type";
+
+            var connectionString = _connectDB.GetConnectionString();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Type", type);
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                var product = new Products
+                                {
+                                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                                    Type = reader.GetString(reader.GetOrdinal("Type"))
+                                };
+                                products.Add(product);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Database query error: {ex.Message}");
+            }
+
+            return products;
+        }
+
+
+        public async Task<List<string>> GetAllProductNamesAsync()
+        {
+            var query = "SELECT Name FROM Product";
+            var connectionString = _connectDB.GetConnectionString();
+            var productNames = new List<string>();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                productNames.Add(reader.GetString(reader.GetOrdinal("Name")));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return productNames;
+        }
+
+        public async Task<List<string>> GetAllSizeNamesAsync()
+        {
+            var query = "SELECT Size FROM Size";
+            var connectionString = _connectDB.GetConnectionString();
+            var sizeNames = new List<string>();
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                sizeNames.Add(reader.GetString(reader.GetOrdinal("Size")));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return sizeNames;
+        }
     }
+
 }

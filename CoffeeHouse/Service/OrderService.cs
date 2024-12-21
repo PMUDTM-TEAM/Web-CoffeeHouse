@@ -351,22 +351,58 @@ namespace CoffeeHouse.Service
 
         public async Task<bool> CancelOrderAsync(int orderId)
         {
-            string query = @"
-        UPDATE [Order]
-        SET Status = 'Canceled'
-        WHERE Id = @OrderId AND Status = 'Pending'";
+            string cancelOrderQuery = @"
+    UPDATE [Order]
+    SET Status = 'Canceled'
+    WHERE Id = @OrderId AND Status = 'Pending'";
+
+            string updateProductVariantQuery = @"
+    UPDATE pv
+    SET pv.Quantity = pv.Quantity + od.Quantity
+    FROM ProductVariant pv
+    INNER JOIN OrderDetail od ON pv.Id = od.ProVar_Id
+    WHERE od.Order_Id = @OrderId";
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectDB.GetConnectionString()))
                 {
                     await conn.OpenAsync();
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@OrderId", orderId);
 
-                    int rowsAffected = await cmd.ExecuteNonQueryAsync();
+                    // Sử dụng transaction để đảm bảo cả hai thao tác đều được thực hiện cùng lúc
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Cập nhật trạng thái đơn hàng
+                            SqlCommand cancelOrderCmd = new SqlCommand(cancelOrderQuery, conn, transaction);
+                            cancelOrderCmd.Parameters.AddWithValue("@OrderId", orderId);
+                            int rowsAffected = await cancelOrderCmd.ExecuteNonQueryAsync();
 
-                    return rowsAffected > 0; 
+                            if (rowsAffected > 0)
+                            {
+                                // Cập nhật số lượng sản phẩm trong kho
+                                SqlCommand updateProductVariantCmd = new SqlCommand(updateProductVariantQuery, conn, transaction);
+                                updateProductVariantCmd.Parameters.AddWithValue("@OrderId", orderId);
+                                await updateProductVariantCmd.ExecuteNonQueryAsync();
+
+                                // Commit transaction
+                                transaction.Commit();
+                                return true;
+                            }
+                            else
+                            {
+                                transaction.Rollback();
+                                return false; // Đơn hàng không ở trạng thái 'Pending' hoặc không tồn tại
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            Console.WriteLine($"Transaction Error: {ex.Message}");
+                            return false;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -376,11 +412,12 @@ namespace CoffeeHouse.Service
             }
         }
 
-        
+
+
         public async Task<List<Orders>> GetOrdersByEmailAsync(string email)
         {
             string query = @"
-        SELECT Id, TotalPrice, Status, PaymentStatus, PaymentMethod, Address_Id, A_Id, CreatedAt
+        SELECT o.Id, TotalPrice, Status, PaymentStatus, PaymentMethod, Address_Id, A_Id, CreatedAt
         FROM [Order] o
         INNER JOIN Account a ON o.A_Id = a.Id
         WHERE a.Email = @Email";
@@ -420,6 +457,45 @@ namespace CoffeeHouse.Service
                 return new List<Orders>();
             }
         }
+
+
+        //public async Task<List<string>> GetOrderStatusesByEmailAsync(string email)
+        //{
+        //    string query = @"
+        //SELECT o.Status
+        //FROM [Order] o
+        //INNER JOIN Account a ON o.A_Id = a.Id
+        //WHERE a.Email = @Email";
+
+        //    var statuses = new List<string>();
+
+        //    try
+        //    {
+        //        using (var connection = new SqlConnection(_connectDB.GetConnectionString()))
+        //        {
+        //            await connection.OpenAsync();
+
+        //            using (var command = new SqlCommand(query, connection))
+        //            {
+        //                command.Parameters.AddWithValue("@Email", email);
+
+        //                using (var reader = await command.ExecuteReaderAsync())
+        //                {
+        //                    while (await reader.ReadAsync())
+        //                    {
+        //                        statuses.Add(reader.GetString(0));
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error retrieving order statuses: {ex.Message}");
+        //    }
+
+        //    return statuses;
+        //}
 
     }
 }
